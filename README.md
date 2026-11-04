@@ -51,6 +51,12 @@ Chaque `git push` sur `main` redéploie. Sur l’iPhone, l’app se met à jour 
 - **Données → Exporter le journal (CSV)** : une ligne par série, pour l’analyse par le coach.
 - **Données → Restaurer une sauvegarde** : remplace tout par le contenu d’une sauvegarde JSON.
 
+## Photos des exercices
+
+Les démos (`public/exercises/<id>/0.jpg` et `1.jpg`, position de départ / finale) viennent de
+[free-exercise-db](https://github.com/yuhonas/free-exercise-db) (domaine public). La correspondance
+identifiant d’exercice → photos est dans `src/media.ts` ; le JSON du programme n’est pas modifié.
+
 ## Structure du code
 
 ```

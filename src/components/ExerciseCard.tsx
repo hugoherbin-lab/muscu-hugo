@@ -3,6 +3,8 @@ import { formatRIR } from '../program'
 import { unlockAudio, useTimer } from '../timer'
 import type { ExerciseLog, SetLog } from '../types'
 import { WARMUP_REST_SEC, formatPerf, newEmptySet, roundKg, type LastPerformance } from '../workout'
+import { exerciseFrames } from '../media'
+import ExerciseMedia from './ExerciseMedia'
 import RpeSheet from './RpeSheet'
 import SetRow from './SetRow'
 
@@ -38,6 +40,7 @@ export default function ExerciseCard({ log, targetRIR, last, suggestion, onChang
   const workSets = log.sets.filter((s) => s.type === 'work')
   const doneWork = workSets.filter((s) => s.done).length
   const name = log.usedSubstitute ? (ex.substitute ?? ex.name) : ex.name
+  const frames = log.usedSubstitute ? null : exerciseFrames(ex.id)
 
   function patchSet(id: string, patch: Partial<SetLog>) {
     onChange({ ...log, sets: log.sets.map((s) => (s.id === id ? { ...s, ...patch } : s)) })
@@ -96,6 +99,8 @@ export default function ExerciseCard({ log, targetRIR, last, suggestion, onChang
         </div>
         <div className="ex-done-count">{doneWork}/{workSets.length}</div>
       </div>
+
+      {frames && <ExerciseMedia frames={frames} alt={ex.name} />}
 
       {last ? (
         <div className="ex-last">Dernière fois ({last.weekLabel}) : <b>{formatPerf(last.sets, ex.perSide)}</b></div>
