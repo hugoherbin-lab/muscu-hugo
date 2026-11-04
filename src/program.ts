@@ -145,9 +145,14 @@ export function formatShortDate(iso: string): string {
   const [, m, d] = iso.split('-').map(Number)
   return `${d} ${MONTHS[m - 1]}`
 }
+export function formatWeekRange(start: string, end: string): string {
+  const [, m1, d1] = start.split('-').map(Number)
+  const [, m2, d2] = end.split('-').map(Number)
+  return m1 === m2 ? `du ${d1} au ${d2} ${MONTHS[m2 - 1]}` : `du ${d1} ${MONTHS[m1 - 1]} au ${d2} ${MONTHS[m2 - 1]}`
+}
 export function formatDateTime(ts: number): string {
   const d = new Date(ts)
-  return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()} · ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`
+  return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()} à ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`
 }
 export function formatRelativeDay(ts: number): string {
   const today = isoDate()

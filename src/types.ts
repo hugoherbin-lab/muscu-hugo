@@ -52,6 +52,7 @@ export interface Program {
   rules: {
     progression?: string
     tempo?: string
+    findLoad?: string
     shoulderPain?: { range: string; action: string }[]
     [key: string]: unknown
   }
@@ -96,6 +97,8 @@ export interface Workout {
   note: string
   durationMin: number | null
   exercises: ExerciseLog[]
+  /** Exercice affiché à l'écran, pour reprendre exactement au même endroit. */
+  currentExercise?: number
 }
 
 export interface StoredProgram {

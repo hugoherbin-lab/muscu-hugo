@@ -14,7 +14,7 @@ npm install
 npm run dev
 ```
 
-Puis ouvrir http://localhost:5173 et importer `programme-seche.json` via « Importer un programme ».
+Puis ouvrir http://localhost:5173 : le programme se charge tout seul au premier lancement.
 
 ## Construire pour la production
 
@@ -41,8 +41,9 @@ Première fois (déjà fait) : dépôt créé avec `gh repo create`, puis Pages 
 1. Ouvrir l’adresse ci-dessus dans **Safari** (pas Chrome).
 2. Bouton **Partager** (carré avec flèche) → **Sur l’écran d’accueil** → **Ajouter**.
 3. Lancer l’app depuis l’icône : elle s’ouvre en plein écran et fonctionne sans réseau.
-4. Première chose à faire : **Données → Importer un programme** et choisir `programme-seche.json`
-   (le fichier doit être dans l’app Fichiers de l’iPhone, iCloud Drive par exemple).
+4. Le programme `programme-seche.json` est livré avec l’app et se charge tout seul. Quand ce fichier change
+   dans le dépôt, l’app le remplace une seule fois au lancement suivant, sans toucher au journal.
+   Pour charger un autre programme : **Données → Importer un programme**.
 
 ## Mettre à jour l’app
 

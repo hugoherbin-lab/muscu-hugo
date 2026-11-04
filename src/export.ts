@@ -1,5 +1,6 @@
 import { db, setSetting } from './db'
 import { isoDate } from './program'
+import { markSeedApplied } from './seed'
 import type { Program, Setting, StoredProgram, Workout } from './types'
 
 export const BACKUP_SCHEMA = 'muscu-hugo-backup'
@@ -75,6 +76,7 @@ export async function restoreBackup(raw: unknown): Promise<{ workouts: number; h
     await db.workouts.bulkPut(b.workouts as Workout[])
     if (Array.isArray(b.settings)) await db.settings.bulkPut(b.settings as Setting[])
   })
+  if (b.program) await markSeedApplied()
   return { workouts: (b.workouts as Workout[]).length, hasProgram: !!b.program }
 }
 

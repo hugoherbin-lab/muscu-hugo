@@ -11,8 +11,8 @@ export default function RpeSheet({ value, onSelect, onClose }: Props) {
   return (
     <div className="sheet-backdrop" onClick={onClose}>
       <div className="sheet" onClick={(e) => e.stopPropagation()}>
-        <h2>RPE de la série</h2>
-        <p className="muted small">RPE 10 = échec · 9 = 1 rep en réserve · 8 = 2 en réserve · 7 = 3 en réserve</p>
+        <h2>Effort ressenti (RPE)</h2>
+        <p className="muted small">10 : échec. 9 : il restait 1 rep. 8 : il en restait 2. 7 : il en restait 3.</p>
         <div className="rpe-grid">
           {VALUES.map((v) => (
             <button key={v} className={`btn ${value === v ? 'selected' : ''}`} onClick={() => { onSelect(v); onClose() }}>

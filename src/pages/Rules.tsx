@@ -1,7 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { Link } from 'react-router-dom'
 import { db } from '../db'
-import { formatRIR, formatShortDate } from '../program'
+import { formatRIR, formatWeekRange } from '../program'
 
 export default function Rules() {
   const stored = useLiveQuery(() => db.programs.get('active').then((p) => p ?? null))
@@ -22,12 +22,15 @@ export default function Rules() {
       {rules.tempo && (
         <div className="card"><div className="card-title">Tempo</div><p>{rules.tempo}</p></div>
       )}
+      {rules.findLoad && (
+        <div className="card"><div className="card-title">Trouver sa charge</div><p>{rules.findLoad}</p></div>
+      )}
       {Array.isArray(rules.shoulderPain) && rules.shoulderPain.length > 0 && (
         <div className="card">
           <div className="card-title">Douleur épaule droite (0 à 10)</div>
           {rules.shoulderPain.map((r) => (
             <div key={r.range} className="row" style={{ padding: '6px 0', borderTop: '1px solid var(--line)' }}>
-              <span className="badge accent" style={{ minWidth: 48, textAlign: 'center' }}>{r.range}</span>
+              <span className="badge" style={{ minWidth: 48, textAlign: 'center' }}>{r.range}</span>
               <span>{r.action}</span>
             </div>
           ))}
@@ -38,8 +41,8 @@ export default function Rules() {
           <div className="card-title">Semaines</div>
           {program.weeks.map((w) => (
             <div key={w.label} style={{ padding: '6px 0', borderTop: '1px solid var(--line)' }}>
-              <b>{w.label}</b> <span className="muted small">{formatShortDate(w.start)} → {formatShortDate(w.end)}</span>
-              {' · '}RIR {formatRIR(w.targetRIR)}{w.setsMultiplier !== 1 ? ` · séries × ${w.setsMultiplier}` : ''}
+              <b>{w.label}</b> <span className="muted small">{formatWeekRange(w.start, w.end)}</span>
+              <div>RIR {formatRIR(w.targetRIR)}{w.setsMultiplier !== 1 ? `, moitié des séries` : ''}</div>
               {w.note && <div className="muted small">{w.note}</div>}
             </div>
           ))}

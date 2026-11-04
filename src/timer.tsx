@@ -157,18 +157,20 @@ function fmt(sec: number) {
   return `${m}:${String(s).padStart(2, '0')}`
 }
 
+const RING = 2 * Math.PI * 46
+
 function TimerOverlay() {
   const t = useTimer()
   if (!t.state) return null
-  const progress = t.state.totalSec > 0 ? Math.min(1, 1 - t.remaining / t.state.totalSec) : 1
+  const left = t.state.totalSec > 0 ? Math.min(1, t.remaining / t.state.totalSec) : 0
 
   if (t.finished) {
     return (
       <div className="timer-full timer-finished" onClick={t.dismiss} role="button">
-        <div className="timer-label">Repos terminé</div>
-        <div className="timer-big">GO !</div>
+        <div className="timer-word">Repos terminé</div>
+        <div className="timer-big">Go</div>
         <div className="timer-sub">{t.state.label}</div>
-        <button className="btn btn-xl" onClick={t.dismiss}>OK</button>
+        <button className="timer-skip" onClick={t.dismiss}>Reprendre</button>
       </div>
     )
   }
@@ -177,7 +179,7 @@ function TimerOverlay() {
     return (
       <button className="timer-mini" onClick={() => t.setMinimized(false)}>
         <span className="timer-mini-time">{fmt(t.remaining)}</span>
-        <span className="timer-mini-label">repos · {t.state.label}</span>
+        <span className="timer-mini-label">{t.state.label}</span>
         <span className="timer-mini-skip" onClick={(e) => { e.stopPropagation(); t.skip() }}>Passer</span>
       </button>
     )
@@ -185,16 +187,23 @@ function TimerOverlay() {
 
   return (
     <div className="timer-full">
-      <button className="timer-reduce" onClick={() => t.setMinimized(true)}>Réduire ▾</button>
-      <div className="timer-label">Repos</div>
-      <div className="timer-big">{fmt(t.remaining)}</div>
-      <div className="timer-progress"><div style={{ width: `${progress * 100}%` }} /></div>
+      <button className="timer-reduce" onClick={() => t.setMinimized(true)}>Réduire</button>
+      <div className="timer-disc">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle className="track" cx="50" cy="50" r="46" />
+          <circle className="left" cx="50" cy="50" r="46" strokeDasharray={RING} strokeDashoffset={RING * (1 - left)} />
+        </svg>
+        <div className="timer-center">
+          <div className="timer-word">Repos</div>
+          <div className="timer-big">{fmt(t.remaining)}</div>
+        </div>
+      </div>
       <div className="timer-sub">{t.state.label}</div>
       <div className="timer-actions">
-        <button className="btn btn-lg" onClick={() => t.adjust(-15)}>−15 s</button>
-        <button className="btn btn-lg" onClick={() => t.adjust(15)}>+15 s</button>
+        <button onClick={() => t.adjust(-15)}>−15 s</button>
+        <button onClick={() => t.adjust(15)}>+15 s</button>
       </div>
-      <button className="btn btn-xl btn-primary" onClick={t.skip}>Passer</button>
+      <button className="timer-skip" onClick={t.skip}>Passer le repos</button>
     </div>
   )
 }

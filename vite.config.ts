@@ -15,7 +15,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icons/*.png', 'icons/favicon.svg', 'programme-seche.json'],
+      includeAssets: ['icons/*.png', 'icons/favicon.svg'],
       manifest: {
         name: 'Muscu Hugo',
         short_name: 'Muscu',
@@ -25,8 +25,8 @@ export default defineConfig({
         scope: base,
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#0f1115',
-        theme_color: '#0f1115',
+        background_color: '#12212e',
+        theme_color: '#12212e',
         icons: [
           { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },

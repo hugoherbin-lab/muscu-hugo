@@ -36,7 +36,7 @@ function png(size, draw) {
     chunk('IHDR', ihdr), chunk('IDAT', deflateSync(raw)), chunk('IEND', Buffer.alloc(0)),
   ])
 }
-const BG = [15, 17, 21, 255], ACC = [255, 122, 69, 255], TR = [0, 0, 0, 0]
+const BG = [18, 33, 46, 255], ACC = [245, 197, 24, 255], TR = [0, 0, 0, 0]
 const inRect = (x, y, cx, cy, w, h) => Math.abs(x - cx) <= w / 2 && Math.abs(y - cy) <= h / 2
 function dumbbell(x, y) {
   if (inRect(x, y, 0.5, 0.5, 0.56, 0.08)) return true
@@ -54,5 +54,5 @@ mkdirSync('public/icons', { recursive: true })
 writeFileSync('public/icons/icon-192.png', png(192, drawRounded))
 writeFileSync('public/icons/icon-512.png', png(512, drawSquare))
 writeFileSync('public/icons/apple-touch-icon.png', png(180, drawSquare))
-writeFileSync('public/icons/favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="#0f1115"/><rect x="22" y="46" width="56" height="8" fill="#ff7a45"/><rect x="19" y="29" width="10" height="42" fill="#ff7a45"/><rect x="71" y="29" width="10" height="42" fill="#ff7a45"/><rect x="9.5" y="35" width="7" height="30" fill="#ff7a45"/><rect x="83.5" y="35" width="7" height="30" fill="#ff7a45"/></svg>`)
+writeFileSync('public/icons/favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="#12212e"/><rect x="22" y="46" width="56" height="8" fill="#f5c518"/><rect x="19" y="29" width="10" height="42" fill="#f5c518"/><rect x="71" y="29" width="10" height="42" fill="#f5c518"/><rect x="9.5" y="35" width="7" height="30" fill="#f5c518"/><rect x="83.5" y="35" width="7" height="30" fill="#f5c518"/></svg>`)
 console.log('icônes générées')

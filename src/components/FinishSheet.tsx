@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { parseNum } from './SetRow'
+import { parseNum } from './Stepper'
 
 interface Props {
   defaultDurationMin: number
@@ -43,7 +43,7 @@ export default function FinishSheet({ defaultDurationMin, onConfirm, onClose }: 
             className="btn btn-ok grow btn-lg"
             onClick={() => onConfirm({ shoulderPain: pain, note, durationMin: Math.max(0, Math.round(duration ?? defaultDurationMin)) })}
           >
-            Terminer ✓
+            Terminer la séance
           </button>
         </div>
       </div>

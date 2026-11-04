@@ -61,7 +61,7 @@ export default function Data() {
       <div className="card">
         <div className="card-title">Programme</div>
         {stored ? (
-          <p className="muted small">{stored.program.programName} · importé le {formatDateTime(stored.importedAt)}</p>
+          <p className="muted small">{stored.program.programName}, chargé le {formatDateTime(stored.importedAt)}.</p>
         ) : (
           <p className="muted small">Aucun programme chargé.</p>
         )}

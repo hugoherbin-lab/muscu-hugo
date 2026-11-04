@@ -53,13 +53,13 @@ function makeWarmupSets(exercise: Exercise): SetLog[] {
   return exercise.warmup.map((w) => ({ id: uid(), type: 'warmup', weightKg: w.weightKg, reps: w.reps, rpe: null, done: false, doneAt: null }))
 }
 
-/** Pré-remplit les séries de travail : dernière performance, sinon startWeightKg. */
+/** Pré-remplit les séries de travail : dernière performance, sinon startWeightKg. Sans l'un ni l'autre : reps à repMin, charge vide. */
 export function makeWorkSets(exercise: Exercise, week: Week, last: LastPerformance | null): SetLog[] {
   const n = workSetCount(exercise, week)
   const sets: SetLog[] = []
   for (let i = 0; i < n; i++) {
     let weightKg: number | null = exercise.startWeightKg
-    let reps: number | null = null
+    let reps: number | null = weightKg == null ? exercise.repMin : null
     if (last) {
       const src = last.sets[i] ?? last.sets[last.sets.length - 1]
       weightKg = src.weightKg

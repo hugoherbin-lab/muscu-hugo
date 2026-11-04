@@ -21,7 +21,6 @@ export default function ExerciseMedia({ frames, alt }: Props) {
         {frames.map((src, k) => (
           <img key={src} src={src} alt={k === 0 ? alt : ''} loading="lazy" decoding="async" style={{ opacity: k === i ? 1 : 0 }} />
         ))}
-        <span className="ex-media-dots">{frames.map((_, k) => <i key={k} className={k === i ? 'on' : ''} />)}</span>
       </button>
       {big && (
         <div className="sheet-backdrop media-backdrop" onClick={() => setBig(false)}>

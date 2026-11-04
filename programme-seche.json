@@ -1,6 +1,6 @@
 {
   "schema": "hugo-training-program",
-  "version": 1,
+  "version": 2,
   "programName": "Bloc sèche — split par groupe",
   "startDate": "2026-11-04",
   "gym": "Basic-Fit Caudry",
@@ -101,7 +101,8 @@
         "range": "6+",
         "action": "Arrêter l'exercice, fourmillements = consulter"
       }
-    ]
+    ],
+    "findLoad": "Charge à trouver (startWeightKg vide) : 1re série avec une charge légère, vise le haut de la fourchette. Si tu aurais pu faire plus de 3 reps en plus, augmente de 10-20 % pour la série suivante. La charge de la dernière série réussie au RIR cible devient ta charge de départ."
   },
   "dailyScore": [
     "Séance faite (repos = acquis)",
@@ -426,7 +427,7 @@
           "restSec": 60,
           "warmup": [],
           "startWeightKg": null,
-          "startNote": "Charge qui permet 20 reps",
+          "startNote": "Charge à trouver : voir méthode série test",
           "incrementKg": 1,
           "perSide": false,
           "reference": false,
@@ -447,8 +448,8 @@
           "repMax": 12,
           "restSec": 60,
           "warmup": [],
-          "startWeightKg": null,
-          "startNote": "À trouver (RIR 3)",
+          "startWeightKg": 45,
+          "startNote": "Dernière fois sur Fitbod : 50 × 10",
           "incrementKg": 2.5,
           "perSide": false,
           "reference": false,
@@ -750,8 +751,8 @@
               "reps": 10
             }
           ],
-          "startWeightKg": null,
-          "startNote": "À trouver (RIR 3). Montée : barre seule × 10",
+          "startWeightKg": 60,
+          "startNote": "Estimation (barre comprise), à ajuster à la 1re série",
           "incrementKg": 5,
           "perSide": false,
           "reference": false,
@@ -937,8 +938,8 @@
           "repMax": 15,
           "restSec": 60,
           "warmup": [],
-          "startWeightKg": null,
-          "startNote": "Poids du corps / 70 kg",
+          "startWeightKg": 0,
+          "startNote": "0 = poids du corps (relevés). Si crunch machine : 70 kg",
           "incrementKg": 5,
           "perSide": false,
           "reference": false,
