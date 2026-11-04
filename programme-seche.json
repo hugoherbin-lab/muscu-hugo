@@ -1,0 +1,955 @@
+{
+  "schema": "hugo-training-program",
+  "version": 1,
+  "programName": "Bloc sèche — split par groupe",
+  "startDate": "2026-11-04",
+  "gym": "Basic-Fit Caudry",
+  "cycleOrder": [
+    "pecs",
+    "dos",
+    "jambes",
+    "epaules",
+    "bras"
+  ],
+  "weeks": [
+    {
+      "label": "S0",
+      "start": "2026-11-04",
+      "end": "2026-11-08",
+      "targetRIR": 3,
+      "note": "Rodage : Dos, Jambes, Épaules, Bras (pas de Pecs)",
+      "setsMultiplier": 1
+    },
+    {
+      "label": "S1",
+      "start": "2026-11-09",
+      "end": "2026-11-15",
+      "targetRIR": 3,
+      "note": "Prise en main : régler les machines, noter les charges",
+      "setsMultiplier": 1
+    },
+    {
+      "label": "S2",
+      "start": "2026-11-16",
+      "end": "2026-11-22",
+      "targetRIR": 2,
+      "note": "Double progression lancée",
+      "setsMultiplier": 1
+    },
+    {
+      "label": "S3",
+      "start": "2026-11-23",
+      "end": "2026-11-29",
+      "targetRIR": 2,
+      "note": "",
+      "setsMultiplier": 1
+    },
+    {
+      "label": "S4",
+      "start": "2026-11-30",
+      "end": "2026-12-06",
+      "targetRIR": 1,
+      "note": "",
+      "setsMultiplier": 1
+    },
+    {
+      "label": "S5",
+      "start": "2026-12-07",
+      "end": "2026-12-13",
+      "targetRIR": 1,
+      "note": "Dernière série des isolations à l'échec",
+      "setsMultiplier": 1
+    },
+    {
+      "label": "S6",
+      "start": "2026-12-14",
+      "end": "2026-12-20",
+      "targetRIR": 0.5,
+      "note": "Semaine la plus dure, fin du mode turbo le 20/12",
+      "setsMultiplier": 1
+    },
+    {
+      "label": "S7",
+      "start": "2026-12-21",
+      "end": "2026-12-27",
+      "targetRIR": 3,
+      "note": "Décharge (Noël) : moitié des séries, mêmes charges",
+      "setsMultiplier": 0.5
+    },
+    {
+      "label": "S8",
+      "start": "2026-12-28",
+      "end": "2027-01-03",
+      "targetRIR": 1,
+      "note": "Tests sur les exercices repères",
+      "setsMultiplier": 1
+    }
+  ],
+  "rules": {
+    "progression": "Double progression : quand toutes les séries atteignent repMax au RIR cible, ajouter incrementKg et repartir de repMin.",
+    "tempo": "Descente 2-3 s, 1 s de pause en étirement sur pecs et ischios, montée franche.",
+    "shoulderPain": [
+      {
+        "range": "0-3",
+        "action": "On continue"
+      },
+      {
+        "range": "4-5",
+        "action": "Réduire amplitude ou charge ; si ça persiste, remplaçant"
+      },
+      {
+        "range": "6+",
+        "action": "Arrêter l'exercice, fourmillements = consulter"
+      }
+    ]
+  },
+  "dailyScore": [
+    "Séance faite (repos = acquis)",
+    "Tapis 60 min",
+    "12 000 pas",
+    "Calories loggées ±100 kcal de 2 198",
+    "Protéines ≥ 190 g",
+    "Au lit à 23 h 30",
+    "Zéro alcool"
+  ],
+  "sessions": [
+    {
+      "id": "pecs",
+      "name": "Pecs et latéraux",
+      "order": 1,
+      "defaultDay": "lundi",
+      "exercises": [
+        {
+          "id": "incline-db",
+          "name": "Développé incliné haltères, banc 30°, prise semi-neutre",
+          "muscle": "pecs",
+          "sets": 3,
+          "repMin": 6,
+          "repMax": 10,
+          "restSec": 150,
+          "warmup": [
+            {
+              "weightKg": 20,
+              "reps": 10
+            },
+            {
+              "weightKg": 28,
+              "reps": 5
+            },
+            {
+              "weightKg": 34,
+              "reps": 2
+            }
+          ],
+          "startWeightKg": 40,
+          "startNote": null,
+          "incrementKg": 2,
+          "perSide": false,
+          "reference": true,
+          "supersetGroup": null,
+          "substitute": "Hammer Strength incliné",
+          "tips": [
+            "Omoplates serrées, coudes à ~45° du buste.",
+            "Arrête la descente quand les haltères sont au niveau de la poitrine (épaule droite).",
+            "Descente 2-3 s, montée franche."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=incline+dumbbell+press+technique"
+        },
+        {
+          "id": "hs-chest",
+          "name": "Chest press Hammer Strength",
+          "muscle": "pecs",
+          "sets": 3,
+          "repMin": 8,
+          "repMax": 12,
+          "restSec": 120,
+          "warmup": [
+            {
+              "weightKg": 40,
+              "reps": 6
+            }
+          ],
+          "startWeightKg": 60,
+          "startNote": null,
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": true,
+          "supersetGroup": null,
+          "substitute": "Développé machine",
+          "tips": [
+            "Note le réglage du siège dans les notes.",
+            "Descente contrôlée 2-3 s."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=hammer+strength+chest+press+technique"
+        },
+        {
+          "id": "decline",
+          "name": "Développé décliné machine ou Smith (bas des pecs)",
+          "muscle": "pecs",
+          "sets": 3,
+          "repMin": 8,
+          "repMax": 12,
+          "restSec": 120,
+          "warmup": [
+            {
+              "weightKg": 40,
+              "reps": 6
+            }
+          ],
+          "startWeightKg": 60,
+          "startNote": null,
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Poulie vis-à-vis du haut vers le bas",
+          "tips": [
+            "Léger déclin, prise largeur d'épaules.",
+            "Descente vers le bas des pecs."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=decline+press+machine+technique"
+        },
+        {
+          "id": "cable-fly-high",
+          "name": "Poulie vis-à-vis, du haut vers le bas",
+          "muscle": "pecs",
+          "sets": 3,
+          "repMin": 12,
+          "repMax": 15,
+          "restSec": 60,
+          "warmup": [],
+          "startWeightKg": 12,
+          "startNote": null,
+          "incrementKg": 1,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Écarté machine, poignées basses",
+          "tips": [
+            "Poulies au-dessus des épaules.",
+            "Mains qui se rejoignent devant le bas du ventre."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=high+to+low+cable+fly+technique"
+        },
+        {
+          "id": "cable-lat",
+          "name": "Élévation latérale poulie basse, un bras, câble derrière le corps",
+          "muscle": "épaules latérales",
+          "sets": 4,
+          "repMin": 12,
+          "repMax": 15,
+          "restSec": 60,
+          "warmup": [],
+          "startWeightKg": 9,
+          "startNote": null,
+          "incrementKg": 1,
+          "perSide": true,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Élévation latérale haltères",
+          "tips": [
+            "Buste légèrement penché vers la poulie.",
+            "Monte jusqu'à hauteur d'épaule, pas au-dessus.",
+            "Le coude mène, pas la main."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=cable+lateral+raise+behind+body+technique"
+        },
+        {
+          "id": "rope-pushdown",
+          "name": "Extension triceps à la corde, poulie haute",
+          "muscle": "triceps",
+          "sets": 3,
+          "repMin": 10,
+          "repMax": 15,
+          "restSec": 60,
+          "warmup": [],
+          "startWeightKg": 20,
+          "startNote": null,
+          "incrementKg": 1,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Extension triceps barre, poulie haute",
+          "tips": [
+            "Coudes fixes le long du corps.",
+            "Écarte la corde en bas."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=rope+tricep+pushdown+technique"
+        }
+      ]
+    },
+    {
+      "id": "dos",
+      "name": "Dos, trapèzes et arrière d'épaule",
+      "order": 2,
+      "defaultDay": "mardi",
+      "exercises": [
+        {
+          "id": "lat-wide",
+          "name": "Tirage vertical, prise large",
+          "muscle": "dos",
+          "sets": 3,
+          "repMin": 6,
+          "repMax": 10,
+          "restSec": 150,
+          "warmup": [
+            {
+              "weightKg": 35,
+              "reps": 10
+            },
+            {
+              "weightKg": 50,
+              "reps": 5
+            },
+            {
+              "weightKg": 60,
+              "reps": 2
+            }
+          ],
+          "startWeightKg": 70,
+          "startNote": null,
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": true,
+          "supersetGroup": null,
+          "substitute": "Tractions assistées",
+          "tips": [
+            "Barre jusqu'au haut de la poitrine.",
+            "Buste légèrement incliné en arrière, pas d'élan."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=wide+grip+lat+pulldown+technique"
+        },
+        {
+          "id": "hs-row",
+          "name": "Rowing Hammer Strength unilatéral",
+          "muscle": "dos",
+          "sets": 3,
+          "repMin": 8,
+          "repMax": 12,
+          "restSec": 120,
+          "warmup": [
+            {
+              "weightKg": 40,
+              "reps": 6
+            }
+          ],
+          "startWeightKg": 60,
+          "startNote": null,
+          "incrementKg": 5,
+          "perSide": true,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Tirage horizontal poulie (66 kg)",
+          "tips": [
+            "Poitrine collée au support.",
+            "Tire le coude vers la hanche."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=hammer+strength+iso+row+technique"
+        },
+        {
+          "id": "machine-row",
+          "name": "Rowing machine, poitrine en appui",
+          "muscle": "dos",
+          "sets": 3,
+          "repMin": 8,
+          "repMax": 12,
+          "restSec": 90,
+          "warmup": [],
+          "startWeightKg": 61,
+          "startNote": null,
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Rowing haltère un bras",
+          "tips": [
+            "Pause 1 s en contraction."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=chest+supported+machine+row+technique"
+        },
+        {
+          "id": "lat-neutral",
+          "name": "Tirage vertical, prise neutre",
+          "muscle": "dos",
+          "sets": 2,
+          "repMin": 10,
+          "repMax": 12,
+          "restSec": 90,
+          "warmup": [],
+          "startWeightKg": 60,
+          "startNote": null,
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Tirage vertical à un bras",
+          "tips": [
+            "Étirement complet en haut."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=neutral+grip+lat+pulldown+technique"
+        },
+        {
+          "id": "db-shrug",
+          "name": "Shrugs haltères, 2 s de pause en haut",
+          "muscle": "trapèzes",
+          "sets": 4,
+          "repMin": 8,
+          "repMax": 12,
+          "restSec": 90,
+          "warmup": [
+            {
+              "weightKg": 20,
+              "reps": 10
+            }
+          ],
+          "startWeightKg": 36,
+          "startNote": "36 kg / haltère, à ajuster",
+          "incrementKg": 2,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Shrugs à la Smith machine",
+          "tips": [
+            "Bras tendus, épaules vers les oreilles sans rouler.",
+            "Tiens 2 s en haut, descends en 3 s.",
+            "Sangles autorisées."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=dumbbell+shrug+technique"
+        },
+        {
+          "id": "rear-cable",
+          "name": "Oiseau à la poulie ou pec deck inversé",
+          "muscle": "épaules arrière",
+          "sets": 3,
+          "repMin": 15,
+          "repMax": 20,
+          "restSec": 60,
+          "warmup": [],
+          "startWeightKg": null,
+          "startNote": "Charge qui permet 20 reps",
+          "incrementKg": 1,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Face pull",
+          "tips": [
+            "Bras quasi tendus, ouvre vers l'arrière.",
+            "Pas de trapèzes : épaules basses."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=reverse+pec+deck+technique"
+        },
+        {
+          "id": "preacher-machine",
+          "name": "Curl pupitre machine",
+          "muscle": "biceps",
+          "sets": 3,
+          "repMin": 10,
+          "repMax": 12,
+          "restSec": 60,
+          "warmup": [],
+          "startWeightKg": null,
+          "startNote": "À trouver (RIR 3)",
+          "incrementKg": 2.5,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Curl barre EZ au pupitre",
+          "tips": [
+            "Extension complète en bas, contrôlée."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=machine+preacher+curl+technique"
+        }
+      ]
+    },
+    {
+      "id": "jambes",
+      "name": "Jambes",
+      "order": 3,
+      "defaultDay": "jeudi",
+      "exercises": [
+        {
+          "id": "hack",
+          "name": "Hack squat",
+          "muscle": "quadriceps",
+          "sets": 3,
+          "repMin": 6,
+          "repMax": 10,
+          "restSec": 180,
+          "warmup": [
+            {
+              "weightKg": 20,
+              "reps": 10
+            },
+            {
+              "weightKg": 40,
+              "reps": 5
+            },
+            {
+              "weightKg": 50,
+              "reps": 2
+            }
+          ],
+          "startWeightKg": 60,
+          "startNote": null,
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": true,
+          "supersetGroup": null,
+          "substitute": "Squat à la Smith machine",
+          "tips": [
+            "Bas du dos collé au dossier.",
+            "1 s de pause en bas, genoux dans l'axe des pieds.",
+            "Note le réglage de l'épaulière."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=hack+squat+technique"
+        },
+        {
+          "id": "rdl",
+          "name": "Soulevé de terre jambes tendues, barre",
+          "muscle": "ischios",
+          "sets": 3,
+          "repMin": 6,
+          "repMax": 10,
+          "restSec": 180,
+          "warmup": [
+            {
+              "weightKg": 40,
+              "reps": 8
+            },
+            {
+              "weightKg": 55,
+              "reps": 3
+            }
+          ],
+          "startWeightKg": 70,
+          "startNote": null,
+          "incrementKg": 2.5,
+          "perSide": false,
+          "reference": true,
+          "supersetGroup": null,
+          "substitute": "Version haltères",
+          "tips": [
+            "Genoux légèrement fléchis et fixes, hanches qui reculent.",
+            "Barre collée aux cuisses, dos neutre.",
+            "1 s de pause en bas."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=romanian+deadlift+technique"
+        },
+        {
+          "id": "leg-press",
+          "name": "Presse à cuisses, pieds au milieu du plateau",
+          "muscle": "quadriceps",
+          "sets": 3,
+          "repMin": 10,
+          "repMax": 15,
+          "restSec": 120,
+          "warmup": [
+            {
+              "weightKg": 100,
+              "reps": 8
+            }
+          ],
+          "startWeightKg": 180,
+          "startNote": null,
+          "incrementKg": 10,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Presse machine guidée",
+          "tips": [
+            "Descends sans décoller le bassin."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=leg+press+technique"
+        },
+        {
+          "id": "leg-ext",
+          "name": "Leg extension",
+          "muscle": "quadriceps",
+          "sets": 3,
+          "repMin": 12,
+          "repMax": 15,
+          "restSec": 90,
+          "warmup": [],
+          "startWeightKg": 70,
+          "startNote": null,
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Fentes bulgares haltères",
+          "tips": [
+            "1 s de contraction en haut, descente 3 s."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=leg+extension+technique"
+        },
+        {
+          "id": "seated-curl",
+          "name": "Leg curl assis",
+          "muscle": "ischios",
+          "sets": 3,
+          "repMin": 10,
+          "repMax": 12,
+          "restSec": 90,
+          "warmup": [],
+          "startWeightKg": 70,
+          "startNote": null,
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Leg curl allongé",
+          "tips": [
+            "Pause 1 s en contraction."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=seated+leg+curl+technique"
+        },
+        {
+          "id": "crunch-machine",
+          "name": "Crunch à la machine",
+          "muscle": "abdos",
+          "sets": 3,
+          "repMin": 10,
+          "repMax": 15,
+          "restSec": 60,
+          "warmup": [],
+          "startWeightKg": 70,
+          "startNote": null,
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Relevés de jambes suspendu",
+          "tips": [
+            "Enroule le buste, ne tire pas avec les bras."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=ab+crunch+machine+technique"
+        }
+      ]
+    },
+    {
+      "id": "epaules",
+      "name": "Épaules et trapèzes",
+      "order": 4,
+      "defaultDay": "vendredi",
+      "exercises": [
+        {
+          "id": "shoulder-machine",
+          "name": "Développé épaules machine, prise neutre",
+          "muscle": "épaules avant",
+          "sets": 3,
+          "repMin": 8,
+          "repMax": 12,
+          "restSec": 120,
+          "warmup": [
+            {
+              "weightKg": 20,
+              "reps": 10
+            },
+            {
+              "weightKg": 30,
+              "reps": 5
+            },
+            {
+              "weightKg": 38,
+              "reps": 2
+            }
+          ],
+          "startWeightKg": 45,
+          "startNote": null,
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Si douleur 4+ : 3 séries d'élévations latérales en plus",
+          "tips": [
+            "Dossier presque vertical.",
+            "Descends jusqu'au menton, pas plus bas.",
+            "Applique la règle douleur épaule droite à chaque série."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=machine+shoulder+press+neutral+grip+technique"
+        },
+        {
+          "id": "hs-incline",
+          "name": "Développé incliné Hammer Strength",
+          "muscle": "pecs",
+          "sets": 3,
+          "repMin": 8,
+          "repMax": 12,
+          "restSec": 150,
+          "warmup": [
+            {
+              "weightKg": 25,
+              "reps": 6
+            }
+          ],
+          "startWeightKg": 40,
+          "startNote": null,
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Développé incliné à la Smith",
+          "tips": [
+            "Haut des pecs, 2e passage de la semaine."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=hammer+strength+incline+press+technique"
+        },
+        {
+          "id": "db-lat",
+          "name": "Élévation latérale haltères",
+          "muscle": "épaules latérales",
+          "sets": 4,
+          "repMin": 12,
+          "repMax": 20,
+          "restSec": 60,
+          "warmup": [],
+          "startWeightKg": 10,
+          "startNote": null,
+          "incrementKg": 2,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Élévation latérale machine",
+          "tips": [
+            "À partir de S5 : dernière série en myo-reps (échec, 5 respirations, mini-séries de 3-5)."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=dumbbell+lateral+raise+technique"
+        },
+        {
+          "id": "cable-lat-2",
+          "name": "Élévation latérale poulie basse, un bras",
+          "muscle": "épaules latérales",
+          "sets": 2,
+          "repMin": 15,
+          "repMax": 20,
+          "restSec": 60,
+          "warmup": [],
+          "startWeightKg": 7,
+          "startNote": null,
+          "incrementKg": 1,
+          "perSide": true,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Élévation latérale haltères",
+          "tips": [
+            "Le coude mène, pas la main."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=cable+lateral+raise+technique"
+        },
+        {
+          "id": "smith-shrug",
+          "name": "Shrugs à la Smith machine ou à la machine",
+          "muscle": "trapèzes",
+          "sets": 4,
+          "repMin": 10,
+          "repMax": 15,
+          "restSec": 90,
+          "warmup": [
+            {
+              "weightKg": 0,
+              "reps": 10
+            }
+          ],
+          "startWeightKg": null,
+          "startNote": "À trouver (RIR 3). Montée : barre seule × 10",
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Shrugs haltères",
+          "tips": [
+            "2 s en haut, descente 3 s."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=smith+machine+shrug+technique"
+        },
+        {
+          "id": "db-rear",
+          "name": "Oiseau haltères, buste penché",
+          "muscle": "épaules arrière",
+          "sets": 3,
+          "repMin": 12,
+          "repMax": 20,
+          "restSec": 60,
+          "warmup": [],
+          "startWeightKg": 10,
+          "startNote": null,
+          "incrementKg": 2,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Pec deck inversé",
+          "tips": [
+            "Buste quasi parallèle au sol, bras ouverts vers l'arrière."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=bent+over+dumbbell+reverse+fly+technique"
+        }
+      ]
+    },
+    {
+      "id": "bras",
+      "name": "Bras et latéraux",
+      "order": 5,
+      "defaultDay": "samedi",
+      "exercises": [
+        {
+          "id": "ez-curl",
+          "name": "Curl barre EZ",
+          "muscle": "biceps",
+          "sets": 3,
+          "repMin": 8,
+          "repMax": 12,
+          "restSec": 0,
+          "warmup": [
+            {
+              "weightKg": 15,
+              "reps": 12
+            }
+          ],
+          "startWeightKg": 30,
+          "startNote": null,
+          "incrementKg": 2.5,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": "A",
+          "substitute": "Curl poulie",
+          "tips": [
+            "Coudes fixes, pas de balancier.",
+            "Descente complète en 2-3 s."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=ez+bar+curl+technique"
+        },
+        {
+          "id": "overhead-rope",
+          "name": "Extension triceps poulie au-dessus de la tête, corde",
+          "muscle": "triceps",
+          "sets": 3,
+          "repMin": 10,
+          "repMax": 15,
+          "restSec": 90,
+          "warmup": [
+            {
+              "weightKg": 10,
+              "reps": 12
+            }
+          ],
+          "startWeightKg": 20,
+          "startNote": null,
+          "incrementKg": 1,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": "A",
+          "substitute": "Extension barre EZ au-dessus de la tête",
+          "tips": [
+            "Si l'épaule droite proteste en haut : remplaçant ou amplitude réduite."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=overhead+cable+tricep+extension+technique"
+        },
+        {
+          "id": "hammer",
+          "name": "Curl marteau",
+          "muscle": "biceps",
+          "sets": 3,
+          "repMin": 10,
+          "repMax": 15,
+          "restSec": 0,
+          "warmup": [],
+          "startWeightKg": 18,
+          "startNote": null,
+          "incrementKg": 2,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": "B",
+          "substitute": "Curl marteau à la corde",
+          "tips": [
+            "Prise neutre, coudes fixes."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=hammer+curl+technique"
+        },
+        {
+          "id": "bar-pushdown",
+          "name": "Extension triceps poulie haute, barre",
+          "muscle": "triceps",
+          "sets": 3,
+          "repMin": 10,
+          "repMax": 15,
+          "restSec": 90,
+          "warmup": [],
+          "startWeightKg": 29,
+          "startNote": null,
+          "incrementKg": 1,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": "B",
+          "substitute": "Extension à la corde",
+          "tips": [
+            "Coudes fixes, extension complète."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=tricep+pushdown+bar+technique"
+        },
+        {
+          "id": "cable-fly-high-2",
+          "name": "Poulie vis-à-vis, du haut vers le bas (bas des pecs, 2e passage)",
+          "muscle": "pecs",
+          "sets": 3,
+          "repMin": 12,
+          "repMax": 15,
+          "restSec": 60,
+          "warmup": [],
+          "startWeightKg": 12,
+          "startNote": null,
+          "incrementKg": 1,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Écarté machine, poignées basses",
+          "tips": [
+            "Mains qui se rejoignent devant le bas du ventre."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=high+to+low+cable+fly+technique"
+        },
+        {
+          "id": "cable-lat-3",
+          "name": "Élévation latérale poulie basse, un bras",
+          "muscle": "épaules latérales",
+          "sets": 4,
+          "repMin": 12,
+          "repMax": 15,
+          "restSec": 60,
+          "warmup": [],
+          "startWeightKg": 9,
+          "startNote": null,
+          "incrementKg": 1,
+          "perSide": true,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Élévation latérale haltères",
+          "tips": [
+            "Buste penché vers la poulie, monte à hauteur d'épaule."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=cable+lateral+raise+technique"
+        },
+        {
+          "id": "leg-raise",
+          "name": "Relevés de jambes suspendu ou crunch machine",
+          "muscle": "abdos",
+          "sets": 3,
+          "repMin": 10,
+          "repMax": 15,
+          "restSec": 60,
+          "warmup": [],
+          "startWeightKg": null,
+          "startNote": "Poids du corps / 70 kg",
+          "incrementKg": 5,
+          "perSide": false,
+          "reference": false,
+          "supersetGroup": null,
+          "substitute": "Crunch au sol lesté",
+          "tips": [
+            "Enroule le bassin, pas d'élan."
+          ],
+          "mediaUrl": "https://www.youtube.com/results?search_query=hanging+leg+raise+technique"
+        }
+      ]
+    }
+  ]
+}
