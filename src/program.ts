@@ -52,13 +52,16 @@ export function validateProgram(raw: unknown): Program {
     if (!ids.has(id)) throw new ProgramError(`"cycleOrder" cite une séance inconnue : ${id}.`)
 
   // Normalisation douce des champs optionnels (sans toucher au fichier d'origine).
+  // Les champs inconnus sont conservés tels quels (...s, ...e, ...p) : ils s'affichent automatiquement.
   const sessions: Session[] = (p.sessions as Record<string, unknown>[]).map((s) => ({
+    ...s,
     id: s.id as string,
     name: s.name as string,
     order: isNum(s.order) ? (s.order as number) : 0,
     defaultDay: isStr(s.defaultDay) ? (s.defaultDay as string) : undefined,
     exercises: (s.exercises as Record<string, unknown>[]).map(
       (e): Exercise => ({
+        ...e,
         id: e.id as string,
         name: e.name as string,
         muscle: e.muscle as string,
@@ -81,6 +84,7 @@ export function validateProgram(raw: unknown): Program {
   }))
 
   return {
+    ...p,
     schema: p.schema,
     version: isNum(p.version) ? (p.version as number) : 1,
     programName: p.programName as string,

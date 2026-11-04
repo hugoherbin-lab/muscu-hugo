@@ -1,6 +1,6 @@
 {
   "schema": "hugo-training-program",
-  "version": 2,
+  "version": 3,
   "programName": "Bloc sèche — split par groupe",
   "startDate": "2026-11-04",
   "gym": "Basic-Fit Caudry",
@@ -102,7 +102,17 @@
         "action": "Arrêter l'exercice, fourmillements = consulter"
       }
     ],
-    "findLoad": "Charge à trouver (startWeightKg vide) : 1re série avec une charge légère, vise le haut de la fourchette. Si tu aurais pu faire plus de 3 reps en plus, augmente de 10-20 % pour la série suivante. La charge de la dernière série réussie au RIR cible devient ta charge de départ."
+    "findLoad": "Charge à trouver (startWeightKg vide) : 1re série avec une charge légère, vise le haut de la fourchette. Si tu aurais pu faire plus de 3 reps en plus, augmente de 10-20 % pour la série suivante. La charge de la dernière série réussie au RIR cible devient ta charge de départ.",
+    "rir": "RIR = répétitions en réserve : combien de reps tu pourrais encore faire en fin de série. RIR 3 = tu t'arrêtes 3 reps avant l'échec. Dans l'app, RPE = 10 − RIR (RIR 3 = RPE 7, RIR 2 = RPE 8, RIR 1 = RPE 9, échec = RPE 10).",
+    "validRep": "Une rep ne compte que si l'amplitude et le tempo sont identiques. Une rep bâclée n'est pas une progression.",
+    "autoregulation": [
+      "Moins de reps à charge égale 2 séances de suite sur un exercice : −1 série sur ce muscle la semaine suivante",
+      "Toutes les séries au haut de la fourchette avec plus de RIR que prévu : monte la charge dès la séance suivante",
+      "Courbatures encore présentes à la séance suivante du même muscle : −1 série sur ce muscle",
+      "Nuit de moins de 6 h : RIR +1 sur toute la séance",
+      "Séance manquée : reprends à la suivante dans l'ordre, jamais deux séances le même jour",
+      "Machine prise ou absente (Proville) : utilise le remplaçant ; les exercices ★ se font toujours à Caudry"
+    ]
   },
   "dailyScore": [
     "Séance faite (repos = acquis)",
@@ -277,7 +287,8 @@
           ],
           "mediaUrl": "https://www.youtube.com/results?search_query=rope+tricep+pushdown+technique"
         }
-      ]
+      ],
+      "notes": "Descente des développés limitée au niveau de la poitrine (épaule droite)."
     },
     {
       "id": "dos",
@@ -460,7 +471,8 @@
           ],
           "mediaUrl": "https://www.youtube.com/results?search_query=machine+preacher+curl+technique"
         }
-      ]
+      ],
+      "notes": "Sangles autorisées sur les shrugs."
     },
     {
       "id": "jambes",
@@ -625,7 +637,8 @@
           ],
           "mediaUrl": "https://www.youtube.com/results?search_query=ab+crunch+machine+technique"
         }
-      ]
+      ],
+      "notes": "Note les réglages du hack squat et de la presse dans les notes d'exercice."
     },
     {
       "id": "epaules",
@@ -784,7 +797,8 @@
           ],
           "mediaUrl": "https://www.youtube.com/results?search_query=bent+over+dumbbell+reverse+fly+technique"
         }
-      ]
+      ],
+      "notes": "Exercice 1 = le plus exposé pour l'épaule droite : règle douleur à chaque série."
     },
     {
       "id": "bras",
@@ -950,7 +964,14 @@
           ],
           "mediaUrl": "https://www.youtube.com/results?search_query=hanging+leg+raise+technique"
         }
-      ]
+      ],
+      "notes": "Supersets A et B : enchaîne A1 puis A2 sans pause, repos après A2."
     }
+  ],
+  "generalWarmup": [
+    "4 min de vélo ou tapis, facile",
+    "Rotations externes à la poulie, très léger : 2 × 15 par bras",
+    "Face pull léger : 1 × 15",
+    "Puis les séries de montée du premier exercice"
   ]
 }

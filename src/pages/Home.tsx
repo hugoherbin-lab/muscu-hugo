@@ -123,7 +123,7 @@ export default function Home() {
           {current ? (
             <Link to={`/seance/${current.id}`} className="btn btn-primary btn-xl dock-go">
               <span>Reprendre {current.sessionName}</span>
-              <small>{workoutSetsDone(current)} séries faites</small>
+              <small>{workoutSetsDone(current)} {workoutSetsDone(current) > 1 ? "séries faites" : "série faite"}</small>
             </Link>
           ) : next ? (
             <>

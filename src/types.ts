@@ -22,6 +22,8 @@ export interface Exercise {
   substitute: string | null
   tips: string[]
   mediaUrl: string | null
+  /** Champs ajoutés plus tard au format : conservés et affichés automatiquement. */
+  [key: string]: unknown
 }
 
 export interface Session {
@@ -30,6 +32,8 @@ export interface Session {
   order: number
   defaultDay?: string
   exercises: Exercise[]
+  notes?: unknown
+  [key: string]: unknown
 }
 
 export interface Week {
@@ -58,6 +62,8 @@ export interface Program {
   }
   dailyScore: string[]
   sessions: Session[]
+  generalWarmup?: unknown
+  [key: string]: unknown
 }
 
 // ---- Journal ----
@@ -99,6 +105,9 @@ export interface Workout {
   exercises: ExerciseLog[]
   /** Exercice affiché à l'écran, pour reprendre exactement au même endroit. */
   currentExercise?: number
+  /** Échauffement général : lignes cochées, et écran ouvert ou non. */
+  warmupChecked?: string[]
+  warmupOpen?: boolean
 }
 
 export interface StoredProgram {

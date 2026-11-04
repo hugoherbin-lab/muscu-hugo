@@ -3,12 +3,14 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import ExerciseMedia from '../components/ExerciseMedia'
 import FinishSheet from '../components/FinishSheet'
 import RpeSheet from '../components/RpeSheet'
+import RulesContent from '../components/RulesContent'
 import Stepper from '../components/Stepper'
 import { db } from '../db'
+import { exerciseExtras, sessionExtras, toLines } from '../generic'
 import { exerciseFrames } from '../media'
 import { formatRIR } from '../program'
 import { unlockAudio, useTimer } from '../timer'
-import type { ExerciseLog, SetLog, Workout } from '../types'
+import type { ExerciseLog, Program, SetLog, Workout } from '../types'
 import { useWakeLock } from '../wakeLock'
 import { WARMUP_REST_SEC, formatPerf, groupSupersets, lastPerformance, newEmptySet, progressionSuggestion, roundKg, type LastPerformance } from '../workout'
 
@@ -60,7 +62,8 @@ export default function WorkoutPage() {
   const [workout, setWorkout] = useState<Workout | null | undefined>(undefined)
   const ref = useRef<Workout | null>(null)
   const [perf, setPerf] = useState<Record<string, Perf>>({})
-  const [findLoad, setFindLoad] = useState<string | null>(null)
+  const [program, setProgram] = useState<Program | null>(null)
+  const [rulesOpen, setRulesOpen] = useState(false)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [rpeOpen, setRpeOpen] = useState(false)
   const [planOpen, setPlanOpen] = useState(false)
@@ -79,10 +82,11 @@ export default function WorkoutPage() {
         setWorkout(null)
         return
       }
+      const stored = await db.programs.get('active')
+      if (cancelled) return
+      setProgram(stored?.program ?? null)
       ref.current = w
       setWorkout(w)
-      const stored = await db.programs.get('active')
-      if (!cancelled) setFindLoad(stored?.program.rules.findLoad ?? null)
       const p: Record<string, Perf> = {}
       for (const ex of w.exercises) {
         const last = await lastPerformance(ex.exerciseId, ex.usedSubstitute, w.id)
@@ -141,12 +145,30 @@ export default function WorkoutPage() {
   const frames = log.usedSubstitute ? null : exerciseFrames(ex.id)
   const p = perf[log.exerciseId]
   const needsLoad = !!p && !p.last && ex.startWeightKg == null
-  const tips = needsLoad && findLoad ? [findLoad, ...ex.tips] : ex.tips
+  const findLoad = program?.rules.findLoad
+  const tips = needsLoad && typeof findLoad === 'string' ? [findLoad, ...ex.tips] : ex.tips
+  // Le programme actif prime sur la copie du journal : une séance déjà commencée profite aussi des nouveaux champs.
+  const programSession = program?.sessions.find((s) => s.id === workout.sessionId)
+  const programExercise = programSession?.exercises.find((e) => e.id === log.exerciseId) ?? ex
+  const extras = exerciseExtras(programExercise)
+  const sessionNotes = toLines(programSession?.notes)
+  const sessionMore = sessionExtras(programSession)
+  const warmupItems = toLines(program?.generalWarmup)
+  const warmupChecked = workout.warmupChecked ?? []
+  const anySetDone = workout.exercises.some((e) => e.sets.some((s) => s.done))
+  const showWarmup = workout.status === 'in_progress' && warmupItems.length > 0 && (workout.warmupOpen ?? !anySetDone)
   const allDone = workout.exercises.every(isComplete)
   const elapsedMin = Math.max(0, Math.round(((workout.endedAt ?? Date.now()) - workout.startedAt) / 60000))
   const partners = ex.supersetGroup
     ? workout.exercises.filter((e) => e.exercise.supersetGroup === ex.supersetGroup && e !== log)
     : []
+
+  function toggleWarmupItem(item: string) {
+    update((w) => {
+      const checked = w.warmupChecked ?? []
+      return { ...w, warmupChecked: checked.includes(item) ? checked.filter((x) => x !== item) : [...checked, item] }
+    })
+  }
 
   function patchSet(setId: string, patch: Partial<SetLog>) {
     const current = ref.current!.exercises[index]
@@ -265,13 +287,114 @@ export default function WorkoutPage() {
   const nextIdx = workout.exercises.findIndex((e, i) => i > index && !isComplete(e))
   const anyIdx = nextIdx !== -1 ? nextIdx : workout.exercises.findIndex((e) => !isComplete(e))
 
-  return (
-    <div className="page workout">
+  const header = (
+    <>
       <div className="workout-head">
         <Link to="/" className="back" aria-label="Accueil">‹</Link>
-        <div className="workout-name">{workout.sessionName}<br />{workout.weekLabel}, RIR {formatRIR(workout.targetRIR)}, {elapsedMin} min</div>
+        <div className="workout-name"><span>{workout.sessionName}</span><span>{workout.weekLabel}, RIR {formatRIR(workout.targetRIR)}, {elapsedMin} min</span></div>
+        <button className="btn btn-sm" onClick={() => setRulesOpen(true)}>Règles</button>
         <button className="btn btn-sm" onClick={() => setPlanOpen(true)}>Plan</button>
       </div>
+      {(sessionNotes.length > 0 || sessionMore.length > 0) && (
+        <div className="session-banner">
+          {sessionNotes.map((n, i) => <p key={i}>{n}</p>)}
+          {sessionMore.map((m) => <p key={m.key}><b>{m.label} : </b>{m.lines.join(' ')}</p>)}
+        </div>
+      )}
+    </>
+  )
+
+  const sheets = (
+    <>
+      {planOpen && (
+        <div className="sheet-backdrop" onClick={() => { setPlanOpen(false); setConfirmAbandon(false) }}>
+          <div className="sheet" onClick={(e) => e.stopPropagation()}>
+            <h2>{workout.sessionName}</h2>
+            {warmupItems.length > 0 && (
+              <button className={`plan-row ${showWarmup ? 'now' : ''} ${warmupChecked.length >= warmupItems.length ? 'complete' : ''}`} onClick={() => { update((w) => ({ ...w, warmupOpen: true })); setPlanOpen(false); window.scrollTo(0, 0) }}>
+                <span>Échauffement général</span>
+                <small>{warmupItems.filter((w) => warmupChecked.includes(w)).length} sur {warmupItems.length}</small>
+              </button>
+            )}
+            {groupSupersets(workout.exercises).map((g, gi) => {
+              const rows = g.items.map(({ log: l, index: i }) => (
+                <button key={i} className={`plan-row ${!showWarmup && i === index ? 'now' : ''} ${isComplete(l) ? 'complete' : ''}`} onClick={() => { update((w) => ({ ...w, warmupOpen: false })); goTo(i); setPlanOpen(false) }}>
+                  <span>{l.exercise.reference ? '★ ' : ''}{nameOf(l)}</span>
+                  <small>{workOf(l).filter((s) => s.done).length} sur {workOf(l).length}</small>
+                </button>
+              ))
+              return g.group ? (
+                <div className="plan-group" key={gi}>
+                  <div className="plan-group-title">Superset {g.group}</div>
+                  {rows}
+                </div>
+              ) : <div key={gi}>{rows}</div>
+            })}
+            {workout.status === 'in_progress' && (
+              <div className="stack" style={{ marginTop: 14 }}>
+                <button className="btn btn-ok btn-lg btn-block" onClick={() => { setPlanOpen(false); setFinishing(true) }}>Terminer la séance</button>
+                {confirmAbandon ? (
+                  <div className="alert alert-warn" style={{ marginBottom: 0 }}>
+                    Supprimer cette séance et tout ce qui a été saisi ?
+                    <div className="row" style={{ marginTop: 10 }}>
+                      <button className="btn btn-danger grow" onClick={() => void abandon()}>Supprimer la séance</button>
+                      <button className="btn grow" onClick={() => setConfirmAbandon(false)}>Garder</button>
+                    </div>
+                  </div>
+                ) : (
+                  <button className="btn btn-ghost btn-block" onClick={() => setConfirmAbandon(true)}>Supprimer la séance</button>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {rulesOpen && (
+        <div className="sheet-backdrop" onClick={() => setRulesOpen(false)}>
+          <div className="sheet sheet-tall" onClick={(e) => e.stopPropagation()}>
+            <h2>Règles</h2>
+            <RulesContent rules={program?.rules} />
+            <div className="sheet-close"><button className="btn btn-lg btn-block" onClick={() => setRulesOpen(false)}>Revenir à la séance</button></div>
+          </div>
+        </div>
+      )}
+
+      {rpeOpen && selected && <RpeSheet value={selected.rpe} onSelect={(v) => patchSet(selected.id, { rpe: v })} onClose={() => setRpeOpen(false)} />}
+      {finishing && <FinishSheet defaultDurationMin={elapsedMin} onConfirm={finish} onClose={() => setFinishing(false)} />}
+    </>
+  )
+
+  if (showWarmup) {
+    return (
+      <div className="page workout">
+        {header}
+        <div className="ex-title" style={{ marginTop: 6 }}>Échauffement général</div>
+        <div className="ex-meta">À faire avant le premier exercice.</div>
+        <div className="checklist">
+          {warmupItems.map((item) => {
+            const on = warmupChecked.includes(item)
+            return (
+              <button key={item} className={`check-row ${on ? 'on' : ''}`} role="checkbox" aria-checked={on} onClick={() => toggleWarmupItem(item)}>
+                <span className="t">{on ? '✓' : ''}</span>
+                <span>{item}</span>
+              </button>
+            )
+          })}
+        </div>
+        <div className="console">
+          <div className="console-inner">
+            <button className="do-btn" style={{ width: '100%' }} onClick={() => { update((w) => ({ ...w, warmupOpen: false })); window.scrollTo(0, 0) }}>Passer aux exercices</button>
+          </div>
+        </div>
+        {sheets}
+      </div>
+    )
+  }
+
+  return (
+    <div className="page workout">
+      {header}
 
       <div className="segments" role="group" aria-label={`Exercice ${index + 1} sur ${workout.exercises.length}`}>
         {workout.exercises.map((e, i) => {
@@ -321,10 +444,16 @@ export default function WorkoutPage() {
       </div>
       {ex.substitute && !log.usedSubstitute && <div className="ex-sub">Remplaçant : {ex.substitute}</div>}
 
-      {tips.length > 0 && (
+      {(tips.length > 0 || extras.length > 0) && (
         <details key={`tips-${index}-${needsLoad}`} open={needsLoad}>
           <summary>Conseils</summary>
-          <ul className="tips">{tips.map((t, i) => <li key={i}>{t}</li>)}</ul>
+          {tips.length > 0 && <ul className="tips">{tips.map((t, i) => <li key={i}>{t}</li>)}</ul>}
+          {extras.map((x) => (
+            <div className="tips-extra" key={x.key}>
+              <b>{x.label}</b>
+              <ul className="tips">{x.lines.map((l, i) => <li key={i}>{l}</li>)}</ul>
+            </div>
+          ))}
         </details>
       )}
       <details key={`note-${index}`}>
@@ -375,46 +504,7 @@ export default function WorkoutPage() {
         </div>
       </div>
 
-      {planOpen && (
-        <div className="sheet-backdrop" onClick={() => { setPlanOpen(false); setConfirmAbandon(false) }}>
-          <div className="sheet" onClick={(e) => e.stopPropagation()}>
-            <h2>{workout.sessionName}</h2>
-            {groupSupersets(workout.exercises).map((g, gi) => {
-              const rows = g.items.map(({ log: l, index: i }) => (
-                <button key={i} className={`plan-row ${i === index ? 'now' : ''} ${isComplete(l) ? 'complete' : ''}`} onClick={() => { goTo(i); setPlanOpen(false) }}>
-                  <span>{l.exercise.reference ? '★ ' : ''}{nameOf(l)}</span>
-                  <small>{workOf(l).filter((s) => s.done).length} sur {workOf(l).length}</small>
-                </button>
-              ))
-              return g.group ? (
-                <div className="plan-group" key={gi}>
-                  <div className="plan-group-title">Superset {g.group}</div>
-                  {rows}
-                </div>
-              ) : <div key={gi}>{rows}</div>
-            })}
-            {workout.status === 'in_progress' && (
-              <div className="stack" style={{ marginTop: 14 }}>
-                <button className="btn btn-ok btn-lg btn-block" onClick={() => { setPlanOpen(false); setFinishing(true) }}>Terminer la séance</button>
-                {confirmAbandon ? (
-                  <div className="alert alert-warn" style={{ marginBottom: 0 }}>
-                    Supprimer cette séance et tout ce qui a été saisi ?
-                    <div className="row" style={{ marginTop: 10 }}>
-                      <button className="btn btn-danger grow" onClick={() => void abandon()}>Supprimer la séance</button>
-                      <button className="btn grow" onClick={() => setConfirmAbandon(false)}>Garder</button>
-                    </div>
-                  </div>
-                ) : (
-                  <button className="btn btn-ghost btn-block" onClick={() => setConfirmAbandon(true)}>Supprimer la séance</button>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {rpeOpen && selected && <RpeSheet value={selected.rpe} onSelect={(v) => patchSet(selected.id, { rpe: v })} onClose={() => setRpeOpen(false)} />}
-      {finishing && <FinishSheet defaultDurationMin={elapsedMin} onConfirm={finish} onClose={() => setFinishing(false)} />}
+      {sheets}
     </div>
   )
 }

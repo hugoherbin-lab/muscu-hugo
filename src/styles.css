@@ -136,7 +136,12 @@ label.field { display: block; font-size: 15px; color: var(--dust); margin-bottom
 /* Séance */
 .workout { padding-top: calc(var(--sat) + 8px); padding-bottom: calc(var(--sab) + 300px); }
 .workout-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.workout-name { flex: 1; min-width: 0; font-size: 16px; color: var(--dust); line-height: 1.2; }
+.workout-name { flex: 1; min-width: 0; font-size: 15px; color: var(--dust); line-height: 1.25; }
+.workout-name span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.workout-head .btn-sm { flex: none; padding: 8px 10px; }
+.session-banner { background: var(--floor-2); border-left: 6px solid var(--plate-yellow); border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; font-size: 15px; line-height: 1.3; }
+.session-banner p { margin: 0; }
+.session-banner p + p { margin-top: 4px; }
 .segments { display: flex; gap: 6px; margin-bottom: 14px; }
 .segment {
   flex: 1; height: 32px; padding: 11px 0; background: none; border: 0;
@@ -196,6 +201,26 @@ details summary { min-height: 44px; display: flex; align-items: center; font-wei
 details summary::-webkit-details-marker { display: none; }
 .tips { margin: 0; padding-left: 20px; font-size: 16px; }
 .tips li { margin-bottom: 6px; }
+
+.tips-extra { margin-top: 10px; font-size: 16px; }
+.tips-extra .tips { margin-top: 4px; }
+.checklist { margin-top: 6px; }
+.check-row {
+  display: flex; align-items: center; gap: 14px; width: 100%; min-height: 72px; padding: 10px 4px;
+  background: none; border: 0; border-bottom: 1px solid var(--floor-3); font-size: 18px; text-align: left;
+}
+.check-row .t { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 3px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; }
+.check-row.on .t { background: var(--plate-green); border-color: var(--plate-green); color: var(--ink); }
+.check-row.on { color: var(--dust); }
+.rule { background: var(--floor-2); border-radius: 16px; padding: 14px 16px; margin-bottom: 10px; }
+.sheet .rule { background: var(--floor-3); }
+.rule h3 { font-size: 18px; margin: 0 0 6px; }
+.rule p { margin: 0; font-size: 16px; }
+.rule ul { margin: 0; padding-left: 20px; font-size: 16px; }
+.rule li { margin-bottom: 6px; }
+.week-line { padding: 8px 0; border-top: 1px solid var(--floor-3); font-size: 16px; }
+.sheet-tall { max-height: 92vh; padding-bottom: 0; }
+.sheet-close { position: sticky; bottom: 0; background: var(--floor-2); padding: 10px 0 calc(var(--sab) + 12px); }
 
 /* Console de saisie, dans la zone du pouce */
 .console {
