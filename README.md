@@ -5,7 +5,7 @@ Remplace Hevy pour un seul utilisateur. Aucun compte, aucun serveur : tout reste
 
 - Stack : Vite + React + TypeScript, Dexie (IndexedDB), vite-plugin-pwa.
 - Programme de référence : `programme-seche.json` (format `hugo-training-program`, jamais modifié par l’app).
-- Hébergement : GitHub Pages, déploiement automatique à chaque `git push` (workflow `.github/workflows/deploy.yml`).
+- Hébergement : GitHub Pages (branche `gh-pages`), publié par `npm run deploy`.
 
 ## Lancer en local
 
@@ -24,12 +24,17 @@ VITE_BASE=/muscu-hugo/ npm run build
 
 `VITE_BASE` est le sous-chemin de GitHub Pages (`/<nom-du-dépôt>/`). Sans cette variable, l’app est construite pour la racine `/` (Vercel, Netlify…).
 
-## Déployer sur GitHub Pages (première fois)
+## Déployer sur GitHub Pages
 
-1. Créer le dépôt `muscu-hugo` sur GitHub (public, pour que Pages soit gratuit) et pousser le code sur la branche `main`.
-2. Sur GitHub : **Settings → Pages → Build and deployment → Source : GitHub Actions**.
-3. Le workflow se lance tout seul à chaque push. L’app est ensuite disponible sur
-   `https://<compte>.github.io/muscu-hugo/`.
+```bash
+npm run deploy
+```
+
+Construit l’app avec `VITE_BASE=/muscu-hugo/` et pousse le dossier `dist` sur la branche `gh-pages`
+du dépôt `hugoherbin-lab/muscu-hugo`. GitHub Pages est configuré pour servir cette branche :
+l’app est en ligne 1 à 2 minutes plus tard sur https://hugoherbin-lab.github.io/muscu-hugo/.
+
+Première fois (déjà fait) : dépôt créé avec `gh repo create`, puis Pages → Source : branche `gh-pages`.
 
 ## Installer sur l’iPhone
 
@@ -41,7 +46,7 @@ VITE_BASE=/muscu-hugo/ npm run build
 
 ## Mettre à jour l’app
 
-Chaque `git push` sur `main` redéploie. Sur l’iPhone, l’app se met à jour toute seule au lancement suivant
+Après chaque modification : `git push` (sauvegarde du code) puis `npm run deploy` (mise en ligne). Sur l’iPhone, l’app se met à jour toute seule au lancement suivant
 (fermer complètement l’app puis la rouvrir si l’ancienne version reste affichée).
 
 ## Données et sauvegardes
