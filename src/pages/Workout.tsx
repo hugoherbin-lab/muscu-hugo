@@ -263,7 +263,8 @@ export default function WorkoutPage() {
     update((w) => ({ ...w, ...data, status: 'done', endedAt: Date.now() }))
     timer.skip()
     setFinishing(false)
-    navigate('/')
+    // La séance ne passe à « terminée » qu'ici, et l'écran de confirmation prend le relais.
+    navigate(`/seance/${workout!.id}/enregistree`, { replace: true })
   }
 
   async function abandon() {
@@ -287,10 +288,13 @@ export default function WorkoutPage() {
   const nextIdx = workout.exercises.findIndex((e, i) => i > index && !isComplete(e))
   const anyIdx = nextIdx !== -1 ? nextIdx : workout.exercises.findIndex((e) => !isComplete(e))
 
+  const workSetsDone = workout.exercises.reduce((n, e) => n + workOf(e).filter((x) => x.done).length, 0)
+  const workSetsTotal = workout.exercises.reduce((n, e) => n + workOf(e).length, 0)
+
   const header = (
     <>
       <div className="workout-head">
-        <Link to="/" className="back" aria-label="Accueil">‹</Link>
+        <Link to={workout.status === 'done' ? `/historique/${workout.id}` : '/'} className="back" aria-label="Retour">‹</Link>
         <div className="workout-name"><span>{workout.sessionName}</span><span>{workout.weekLabel}, RIR {formatRIR(workout.targetRIR)}, {elapsedMin} min</span></div>
         <button className="btn btn-sm" onClick={() => setRulesOpen(true)}>Règles</button>
         <button className="btn btn-sm" onClick={() => setPlanOpen(true)}>Plan</button>
@@ -361,7 +365,7 @@ export default function WorkoutPage() {
       )}
 
       {rpeOpen && selected && <RpeSheet value={selected.rpe} onSelect={(v) => patchSet(selected.id, { rpe: v })} onClose={() => setRpeOpen(false)} />}
-      {finishing && <FinishSheet defaultDurationMin={elapsedMin} onConfirm={finish} onClose={() => setFinishing(false)} />}
+      {finishing && <FinishSheet defaultDurationMin={elapsedMin} doneSets={workSetsDone} totalSets={workSetsTotal} onConfirm={finish} onClose={() => setFinishing(false)} />}
     </>
   )
 
@@ -461,14 +465,21 @@ export default function WorkoutPage() {
         <textarea defaultValue={log.note} placeholder="Réglage du siège, sensation, douleur" onChange={(e) => setExercise(index, { ...ref.current!.exercises[index], note: e.target.value })} />
       </details>
 
+      {workout.status === 'in_progress' && (
+        <button className="btn btn-ok btn-lg btn-block finish-end" onClick={() => setFinishing(true)}>Terminer la séance</button>
+      )}
+
       <div className="console">
         <div className="console-inner">
           {selected ? (
             <>
+              <div className="console-top">
               <div className="console-label">
                 {selected.type === 'warmup'
                   ? `Échauffement ${warmSets.indexOf(selected) + 1} sur ${warmSets.length}`
                   : `Série ${workSets.indexOf(selected) + 1} sur ${workSets.length}, vise ${ex.repMin} à ${ex.repMax} reps`}
+              </div>
+              {workout.status === 'in_progress' && <button className="finish-chip" aria-label="Terminer la séance" onClick={() => setFinishing(true)}>Terminer</button>}
               </div>
               {selected.weightKg == null && ex.startNote && !log.usedSubstitute && <div className="console-hint">{ex.startNote}</div>}
               <Stepper key={`w-${selected.id}`} field="kg" unit="kg" inputMode="decimal" step={ex.incrementKg} value={selected.weightKg} onChange={(v) => patchSet(selected.id, { weightKg: v })} />
@@ -497,9 +508,12 @@ export default function WorkoutPage() {
               <Link to="/" className="btn btn-xl">Retour à l’accueil</Link>
             )
           ) : (
-            <button className="do-btn next" style={{ width: '100%' }} onClick={() => goTo(anyIdx)}>
-              Exercice suivant<small>{nameOf(workout.exercises[anyIdx])}</small>
-            </button>
+            <div className="console-actions">
+              <button className="do-btn next" onClick={() => goTo(anyIdx)}>
+                Exercice suivant<small>{nameOf(workout.exercises[anyIdx])}</small>
+              </button>
+              {workout.status === 'in_progress' && <button className="do-btn undo finish-side" onClick={() => setFinishing(true)}>Terminer la séance</button>}
+            </div>
           )}
         </div>
       </div>

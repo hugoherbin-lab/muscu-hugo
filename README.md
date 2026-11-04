@@ -24,6 +24,13 @@ VITE_BASE=/muscu-hugo/ npm run build
 
 `VITE_BASE` est le sous-chemin de GitHub Pages (`/<nom-du-dépôt>/`). Sans cette variable, l’app est construite pour la racine `/` (Vercel, Netlify…).
 
+## Déployer sur Vercel (adresse utilisée : https://muscu-hugo.vercel.app/)
+
+```bash
+npx vite build --outDir /tmp/muscu-vercel --emptyOutDir
+cd /tmp/muscu-vercel && npx vercel@latest deploy --prod --yes --name muscu-hugo
+```
+
 ## Déployer sur GitHub Pages
 
 ```bash

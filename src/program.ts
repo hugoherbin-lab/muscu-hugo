@@ -126,15 +126,6 @@ export function workSetCount(exercise: Exercise, week: Week): number {
   return Math.max(1, Math.ceil(exercise.sets * week.setsMultiplier))
 }
 
-/** Prochaine séance dans cycleOrder après la dernière séance terminée. */
-export function nextSessionId(program: Program, lastDoneSessionId: string | null): string {
-  const order = program.cycleOrder
-  if (!lastDoneSessionId) return order[0]
-  const i = order.indexOf(lastDoneSessionId)
-  if (i === -1) return order[0]
-  return order[(i + 1) % order.length]
-}
-
 export function sessionById(program: Program, id: string): Session | undefined {
   return program.sessions.find((s) => s.id === id)
 }
@@ -148,6 +139,9 @@ const MONTHS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'aoû
 export function formatShortDate(iso: string): string {
   const [, m, d] = iso.split('-').map(Number)
   return `${d} ${MONTHS[m - 1]}`
+}
+export function formatDayMonth(ts: number): string {
+  return formatShortDate(isoDate(new Date(ts)))
 }
 export function formatWeekRange(start: string, end: string): string {
   const [, m1, d1] = start.split('-').map(Number)

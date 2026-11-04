@@ -137,3 +137,27 @@ export function groupSupersets(exercises: ExerciseLog[]): { group: string | null
   })
   return out
 }
+
+export interface WorkoutStats {
+  durationMin: number
+  workSets: number
+  warmupSets: number
+  /** Total soulevé sur les séries de travail cochées : charge × reps, comme saisi. */
+  volumeKg: number
+}
+
+export function workoutStats(w: Workout): WorkoutStats {
+  let workSets = 0, warmupSets = 0, volumeKg = 0
+  for (const e of w.exercises) {
+    for (const s of e.sets) {
+      if (!s.done) continue
+      if (s.type === 'warmup') warmupSets++
+      else {
+        workSets++
+        volumeKg += (s.weightKg ?? 0) * (s.reps ?? 0)
+      }
+    }
+  }
+  const elapsed = Math.round(((w.endedAt ?? Date.now()) - w.startedAt) / 60000)
+  return { durationMin: w.durationMin ?? Math.max(0, elapsed), workSets, warmupSets, volumeKg: Math.round(volumeKg) }
+}

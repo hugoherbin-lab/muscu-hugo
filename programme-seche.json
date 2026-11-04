@@ -1,6 +1,6 @@
 {
   "schema": "hugo-training-program",
-  "version": 3,
+  "version": 4,
   "programName": "Bloc sèche — split par groupe",
   "startDate": "2026-11-04",
   "gym": "Basic-Fit Caudry",
@@ -333,7 +333,7 @@
         },
         {
           "id": "hs-row",
-          "name": "Rowing Hammer Strength unilatéral",
+          "name": "Tirage horizontal poulie, poignée triangle",
           "muscle": "dos",
           "sets": 3,
           "repMin": 8,
@@ -341,26 +341,27 @@
           "restSec": 120,
           "warmup": [
             {
-              "weightKg": 40,
+              "weightKg": 45,
               "reps": 6
             }
           ],
-          "startWeightKg": 60,
+          "startWeightKg": 66,
           "startNote": null,
           "incrementKg": 5,
-          "perSide": true,
+          "perSide": false,
           "reference": false,
           "supersetGroup": null,
-          "substitute": "Tirage horizontal poulie (66 kg)",
+          "substitute": "Rowing haltère un bras",
           "tips": [
-            "Poitrine collée au support.",
-            "Tire le coude vers la hanche."
+            "Buste droit, légère inclinaison avant en étirement, pas d'élan.",
+            "Tire la poignée vers le nombril, coudes le long du corps.",
+            "Pause 1 s en contraction, omoplates serrées."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=hammer+strength+iso+row+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=seated+cable+row+v+handle+technique"
         },
         {
           "id": "machine-row",
-          "name": "Rowing machine, poitrine en appui",
+          "name": "Rowing assis à la machine",
           "muscle": "dos",
           "sets": 3,
           "repMin": 8,
@@ -373,11 +374,12 @@
           "perSide": false,
           "reference": false,
           "supersetGroup": null,
-          "substitute": "Rowing haltère un bras",
+          "substitute": "Tirage horizontal poulie, prise large",
           "tips": [
+            "Poitrine contre l'appui si la machine en a un.",
             "Pause 1 s en contraction."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=chest+supported+machine+row+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=seated+machine+row+technique"
         },
         {
           "id": "lat-neutral",
