@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import ExerciseMedia from '../components/ExerciseMedia'
 import FinishSheet from '../components/FinishSheet'
 import RpeSheet from '../components/RpeSheet'
 import RulesContent from '../components/RulesContent'
+import SchemaImage from '../components/SchemaImage'
 import Stepper from '../components/Stepper'
 import { db } from '../db'
 import { exerciseExtras, sessionExtras, toLines } from '../generic'
-import { exerciseFrames } from '../media'
+import { schemaUrl } from '../schema'
 import { formatRIR } from '../program'
 import { unlockAudio, useTimer } from '../timer'
 import type { ExerciseLog, Program, SetLog, Workout } from '../types'
@@ -142,7 +142,6 @@ export default function WorkoutPage() {
   const warmSets = log.sets.filter((s) => s.type === 'warmup')
   const selected =
     log.sets.find((s) => s.id === selectedId) ?? (isComplete(log) ? null : (log.sets.find((s) => !s.done) ?? null))
-  const frames = log.usedSubstitute ? null : exerciseFrames(ex.id)
   const p = perf[log.exerciseId]
   const needsLoad = !!p && !p.last && ex.startWeightKg == null
   const findLoad = program?.rules.findLoad
@@ -151,6 +150,8 @@ export default function WorkoutPage() {
   const programSession = program?.sessions.find((s) => s.id === workout.sessionId)
   const programExercise = programSession?.exercises.find((e) => e.id === log.exerciseId) ?? ex
   const extras = exerciseExtras(programExercise)
+  // Le schéma montre l'exercice prévu : il est masqué quand le remplaçant est utilisé.
+  const schema = log.usedSubstitute ? null : schemaUrl(programExercise.imageFile ?? ex.imageFile)
   const sessionNotes = toLines(programSession?.notes)
   const sessionMore = sessionExtras(programSession)
   const warmupItems = toLines(program?.generalWarmup)
@@ -412,12 +413,12 @@ export default function WorkoutPage() {
 
       <div className="ex-title">{ex.reference && <span className="star" aria-label="Exercice repère">★ </span>}{nameOf(log)}</div>
       {log.usedSubstitute && <div className="ex-replaces">Remplace : {ex.name}</div>}
+      {schema && <SchemaImage key={schema} src={schema} alt={ex.name} />}
       <div className="ex-meta">
         {ex.muscle[0].toUpperCase() + ex.muscle.slice(1)}. {workSets.length} × {ex.repMin} à {ex.repMax} reps{ex.perSide ? ' par bras' : ''}, {restText(ex.restSec)}.
       </div>
       {partners.length > 0 && <div className="superset-note">Superset {ex.supersetGroup} avec {partners.map(nameOf).join(', ')}.</div>}
 
-      {frames && <ExerciseMedia frames={frames} alt={ex.name} />}
 
       {p?.last ? (
         <div className="ex-last">Dernière fois : <b>{formatPerf(p.last.sets, ex.perSide)}</b></div>

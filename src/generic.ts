@@ -25,7 +25,7 @@ const LABELS: Record<string, string> = {
 const SESSION_HANDLED = new Set(['id', 'name', 'order', 'defaultDay', 'exercises', 'notes'])
 const EXERCISE_HANDLED = new Set([
   'id', 'name', 'muscle', 'sets', 'repMin', 'repMax', 'restSec', 'warmup', 'startWeightKg', 'startNote',
-  'incrementKg', 'perSide', 'reference', 'supersetGroup', 'substitute', 'tips', 'mediaUrl',
+  'incrementKg', 'perSide', 'reference', 'supersetGroup', 'substitute', 'tips', 'mediaUrl', 'imageFile',
 ])
 
 export function labelFor(key: string): string {

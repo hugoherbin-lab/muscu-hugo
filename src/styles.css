@@ -205,18 +205,17 @@ label.field { display: block; font-size: 15px; color: var(--dust); margin-bottom
   border-left: 4px solid var(--plate-yellow); padding: 2px 0 2px 10px;
   font-size: 16px; margin-bottom: 10px;
 }
-.ex-media {
-  position: relative; display: block; width: 100%; height: 140px; padding: 0; margin-bottom: 10px;
-  background: #0a1620; border: 0; border-radius: 16px; overflow: hidden;
+/* Schéma d'exercice : 700 × 330, vues DÉPART et FIN côte à côte */
+.ex-schema { display: block; width: 100%; padding: 0; margin: 4px 0 10px; border: 0; border-radius: 14px; overflow: hidden; background: #fff; }
+.ex-schema img { display: block; width: 100%; height: auto; aspect-ratio: 700 / 330; object-fit: contain; }
+.schema-full {
+  position: fixed; inset: 0; z-index: 60; background: #fff; display: flex; flex-direction: column;
+  padding: calc(var(--sat) + 8px) 12px calc(var(--sab) + 12px);
 }
-.ex-media img, .media-big-frame img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
-  transition: opacity 0.25s ease;
-}
-.media-backdrop { align-items: center; justify-content: center; padding: 16px; }
-.media-big { width: 100%; max-width: 480px; background: var(--floor-2); border-radius: 20px; padding: 12px; }
-.media-big-frame { position: relative; width: 100%; aspect-ratio: 1; background: #0a1620; border-radius: 12px; overflow: hidden; }
-.media-big-caption { margin: 10px 0; font-weight: 700; text-align: center; }
+.schema-full-frame { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.schema-full-frame img { display: block; width: 100%; height: auto; max-height: 100%; object-fit: contain; }
+.schema-full-frame.turned img { width: auto; height: auto; max-height: none; max-width: none; width: calc(100dvh - var(--sat) - var(--sab) - 110px); transform: rotate(90deg); }
+.schema-full-actions { display: flex; gap: 10px; padding-top: 10px; }
 .ex-last { font-size: 17px; margin-bottom: 10px; }
 .ex-last b { font-weight: 700; }
 .ex-suggest {
@@ -374,5 +373,5 @@ details summary::-webkit-details-marker { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .timer-finished { animation: none; }
-  .ex-media img, .media-big-frame img, .timer-disc .left { transition: none; }
+  .timer-disc .left { transition: none; }
 }

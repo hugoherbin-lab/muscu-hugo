@@ -64,11 +64,11 @@ Après chaque modification : `git push` (sauvegarde du code) puis `npm run deplo
 - **Données → Exporter le journal (CSV)** : une ligne par série, pour l’analyse par le coach.
 - **Données → Restaurer une sauvegarde** : remplace tout par le contenu d’une sauvegarde JSON.
 
-## Photos des exercices
+## Schémas des exercices
 
-Les démos (`public/exercises/<id>/0.jpg` et `1.jpg`, position de départ / finale) viennent de
-[free-exercise-db](https://github.com/yuhonas/free-exercise-db) (domaine public). La correspondance
-identifiant d’exercice → photos est dans `src/media.ts` ; le JSON du programme n’est pas modifié.
+Un exercice affiche un schéma seulement si le programme contient `imageFile` (ex. `"imageFile": "croise-poulies.svg"`).
+Les fichiers sont dans `public/schemas/` et sont mis en cache pour le hors-ligne. Aucune image n'est associée
+automatiquement : sans `imageFile`, pas d'image.
 
 ## Structure du code
 
