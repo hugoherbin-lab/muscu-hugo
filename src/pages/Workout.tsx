@@ -423,7 +423,7 @@ export default function WorkoutPage() {
       {p?.last ? (
         <div className="ex-last">Dernière fois : <b>{formatPerf(p.last.sets, ex.perSide)}</b></div>
       ) : (
-        <div className="ex-last muted">Première fois.{ex.startNote && ex.startWeightKg != null ? ` ${ex.startNote}.` : ''}</div>
+        <div className="ex-last muted">Première fois.{ex.startNote && ex.startWeightKg != null ? ` ${ex.startNote}${/[.!?…]$/.test(ex.startNote.trim()) ? '' : '.'}` : ''}</div>
       )}
 
       {p?.suggestion != null && !log.usedSubstitute && (

@@ -206,10 +206,10 @@ label.field { display: block; font-size: 15px; color: var(--dust); margin-bottom
   font-size: 16px; margin-bottom: 10px;
 }
 /* Schéma d'exercice : 700 × 330, vues DÉPART et FIN côte à côte */
-.ex-schema { display: block; width: 100%; padding: 0; margin: 4px 0 10px; border: 0; border-radius: 14px; overflow: hidden; background: #fff; }
+.ex-schema { display: block; width: 100%; padding: 6px; margin: 4px 0 10px; border: 0; border-radius: 14px; overflow: hidden; background: #0e1722; }
 .ex-schema img { display: block; width: 100%; height: auto; aspect-ratio: 700 / 330; object-fit: contain; }
 .schema-full {
-  position: fixed; inset: 0; z-index: 60; background: #fff; display: flex; flex-direction: column;
+  position: fixed; inset: 0; z-index: 60; background: #0e1722; display: flex; flex-direction: column;
   padding: calc(var(--sat) + 8px) 12px calc(var(--sab) + 12px);
 }
 .schema-full-frame { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
