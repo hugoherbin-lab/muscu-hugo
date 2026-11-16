@@ -1,6 +1,6 @@
 {
   "schema": "hugo-training-program",
-  "version": 4,
+  "version": 5,
   "programName": "Bloc sèche — split par groupe",
   "startDate": "2026-11-04",
   "gym": "Basic-Fit Caudry",
@@ -164,7 +164,8 @@
             "Arrête la descente quand les haltères sont au niveau de la poitrine (épaule droite).",
             "Descente 2-3 s, montée franche."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=incline+dumbbell+press+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=incline+dumbbell+press+technique",
+          "imageFile": "schemas/incline-db.svg"
         },
         {
           "id": "hs-chest",
@@ -191,7 +192,8 @@
             "Note le réglage du siège dans les notes.",
             "Descente contrôlée 2-3 s."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=hammer+strength+chest+press+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=hammer+strength+chest+press+technique",
+          "imageFile": "schemas/hs-chest.svg"
         },
         {
           "id": "decline",
@@ -218,7 +220,8 @@
             "Léger déclin, prise largeur d'épaules.",
             "Descente vers le bas des pecs."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=decline+press+machine+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=decline+press+machine+technique",
+          "imageFile": "schemas/decline.svg"
         },
         {
           "id": "cable-fly-high",
@@ -240,7 +243,8 @@
             "Poulies au-dessus des épaules.",
             "Mains qui se rejoignent devant le bas du ventre."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=high+to+low+cable+fly+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=high+to+low+cable+fly+technique",
+          "imageFile": "schemas/cable-fly-high.svg"
         },
         {
           "id": "cable-lat",
@@ -263,7 +267,8 @@
             "Monte jusqu'à hauteur d'épaule, pas au-dessus.",
             "Le coude mène, pas la main."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=cable+lateral+raise+behind+body+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=cable+lateral+raise+behind+body+technique",
+          "imageFile": "schemas/cable-lat.svg"
         },
         {
           "id": "rope-pushdown",
@@ -285,7 +290,8 @@
             "Coudes fixes le long du corps.",
             "Écarte la corde en bas."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=rope+tricep+pushdown+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=rope+tricep+pushdown+technique",
+          "imageFile": "schemas/rope-pushdown.svg"
         }
       ],
       "notes": "Descente des développés limitée au niveau de la poitrine (épaule droite)."
@@ -329,7 +335,8 @@
             "Barre jusqu'au haut de la poitrine.",
             "Buste légèrement incliné en arrière, pas d'élan."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=wide+grip+lat+pulldown+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=wide+grip+lat+pulldown+technique",
+          "imageFile": "schemas/lat-wide.svg"
         },
         {
           "id": "hs-row",
@@ -357,7 +364,8 @@
             "Tire la poignée vers le nombril, coudes le long du corps.",
             "Pause 1 s en contraction, omoplates serrées."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=seated+cable+row+v+handle+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=seated+cable+row+v+handle+technique",
+          "imageFile": "schemas/hs-row.svg"
         },
         {
           "id": "machine-row",
@@ -379,7 +387,8 @@
             "Poitrine contre l'appui si la machine en a un.",
             "Pause 1 s en contraction."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=seated+machine+row+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=seated+machine+row+technique",
+          "imageFile": "schemas/machine-row.svg"
         },
         {
           "id": "lat-neutral",
@@ -400,7 +409,8 @@
           "tips": [
             "Étirement complet en haut."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=neutral+grip+lat+pulldown+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=neutral+grip+lat+pulldown+technique",
+          "imageFile": "schemas/lat-neutral.svg"
         },
         {
           "id": "db-shrug",
@@ -428,7 +438,8 @@
             "Tiens 2 s en haut, descends en 3 s.",
             "Sangles autorisées."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=dumbbell+shrug+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=dumbbell+shrug+technique",
+          "imageFile": "schemas/db-shrug.svg"
         },
         {
           "id": "rear-cable",
@@ -450,7 +461,8 @@
             "Bras quasi tendus, ouvre vers l'arrière.",
             "Pas de trapèzes : épaules basses."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=reverse+pec+deck+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=reverse+pec+deck+technique",
+          "imageFile": "schemas/rear-cable.svg"
         },
         {
           "id": "preacher-machine",
@@ -471,7 +483,8 @@
           "tips": [
             "Extension complète en bas, contrôlée."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=machine+preacher+curl+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=machine+preacher+curl+technique",
+          "imageFile": "schemas/preacher-machine.svg"
         }
       ],
       "notes": "Sangles autorisées sur les shrugs."
@@ -516,7 +529,8 @@
             "1 s de pause en bas, genoux dans l'axe des pieds.",
             "Note le réglage de l'épaulière."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=hack+squat+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=hack+squat+technique",
+          "imageFile": "schemas/hack.svg"
         },
         {
           "id": "rdl",
@@ -548,7 +562,8 @@
             "Barre collée aux cuisses, dos neutre.",
             "1 s de pause en bas."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=romanian+deadlift+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=romanian+deadlift+technique",
+          "imageFile": "schemas/rdl.svg"
         },
         {
           "id": "leg-press",
@@ -574,7 +589,8 @@
           "tips": [
             "Descends sans décoller le bassin."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=leg+press+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=leg+press+technique",
+          "imageFile": "schemas/leg-press.svg"
         },
         {
           "id": "leg-ext",
@@ -595,7 +611,8 @@
           "tips": [
             "1 s de contraction en haut, descente 3 s."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=leg+extension+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=leg+extension+technique",
+          "imageFile": "schemas/leg-ext.svg"
         },
         {
           "id": "seated-curl",
@@ -616,7 +633,8 @@
           "tips": [
             "Pause 1 s en contraction."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=seated+leg+curl+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=seated+leg+curl+technique",
+          "imageFile": "schemas/seated-curl.svg"
         },
         {
           "id": "crunch-machine",
@@ -637,7 +655,8 @@
           "tips": [
             "Enroule le buste, ne tire pas avec les bras."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=ab+crunch+machine+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=ab+crunch+machine+technique",
+          "imageFile": "schemas/crunch-machine.svg"
         }
       ],
       "notes": "Note les réglages du hack squat et de la presse dans les notes d'exercice."
@@ -682,7 +701,8 @@
             "Descends jusqu'au menton, pas plus bas.",
             "Applique la règle douleur épaule droite à chaque série."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=machine+shoulder+press+neutral+grip+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=machine+shoulder+press+neutral+grip+technique",
+          "imageFile": "schemas/shoulder-machine.svg"
         },
         {
           "id": "hs-incline",
@@ -708,7 +728,8 @@
           "tips": [
             "Haut des pecs, 2e passage de la semaine."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=hammer+strength+incline+press+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=hammer+strength+incline+press+technique",
+          "imageFile": "schemas/hs-incline.svg"
         },
         {
           "id": "db-lat",
@@ -729,7 +750,8 @@
           "tips": [
             "À partir de S5 : dernière série en myo-reps (échec, 5 respirations, mini-séries de 3-5)."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=dumbbell+lateral+raise+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=dumbbell+lateral+raise+technique",
+          "imageFile": "schemas/db-lat.svg"
         },
         {
           "id": "cable-lat-2",
@@ -750,7 +772,8 @@
           "tips": [
             "Le coude mène, pas la main."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=cable+lateral+raise+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=cable+lateral+raise+technique",
+          "imageFile": "schemas/cable-lat-2.svg"
         },
         {
           "id": "smith-shrug",
@@ -776,7 +799,8 @@
           "tips": [
             "2 s en haut, descente 3 s."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=smith+machine+shrug+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=smith+machine+shrug+technique",
+          "imageFile": "schemas/smith-shrug.svg"
         },
         {
           "id": "db-rear",
@@ -797,7 +821,8 @@
           "tips": [
             "Buste quasi parallèle au sol, bras ouverts vers l'arrière."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=bent+over+dumbbell+reverse+fly+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=bent+over+dumbbell+reverse+fly+technique",
+          "imageFile": "schemas/db-rear.svg"
         }
       ],
       "notes": "Exercice 1 = le plus exposé pour l'épaule droite : règle douleur à chaque série."
@@ -833,7 +858,8 @@
             "Coudes fixes, pas de balancier.",
             "Descente complète en 2-3 s."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=ez+bar+curl+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=ez+bar+curl+technique",
+          "imageFile": "schemas/ez-curl.svg"
         },
         {
           "id": "overhead-rope",
@@ -859,7 +885,8 @@
           "tips": [
             "Si l'épaule droite proteste en haut : remplaçant ou amplitude réduite."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=overhead+cable+tricep+extension+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=overhead+cable+tricep+extension+technique",
+          "imageFile": "schemas/overhead-rope.svg"
         },
         {
           "id": "hammer",
@@ -880,7 +907,8 @@
           "tips": [
             "Prise neutre, coudes fixes."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=hammer+curl+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=hammer+curl+technique",
+          "imageFile": "schemas/hammer.svg"
         },
         {
           "id": "bar-pushdown",
@@ -901,7 +929,8 @@
           "tips": [
             "Coudes fixes, extension complète."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=tricep+pushdown+bar+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=tricep+pushdown+bar+technique",
+          "imageFile": "schemas/bar-pushdown.svg"
         },
         {
           "id": "cable-fly-high-2",
@@ -922,11 +951,12 @@
           "tips": [
             "Mains qui se rejoignent devant le bas du ventre."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=high+to+low+cable+fly+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=high+to+low+cable+fly+technique",
+          "imageFile": "schemas/cable-fly-high-2.svg"
         },
         {
           "id": "cable-lat-3",
-          "name": "Élévation latérale poulie basse, un bras",
+          "name": "Élévation latérale poulies basses croisées, assis (deux bras)",
           "muscle": "épaules latérales",
           "sets": 4,
           "repMin": 12,
@@ -934,16 +964,18 @@
           "restSec": 60,
           "warmup": [],
           "startWeightKg": 9,
-          "startNote": null,
+          "startNote": "Note la charge d'un seul côté. Garde cette variante tous les samedis.",
           "incrementKg": 1,
-          "perSide": true,
+          "perSide": false,
           "reference": false,
           "supersetGroup": null,
           "substitute": "Élévation latérale haltères",
           "tips": [
-            "Buste penché vers la poulie, monte à hauteur d'épaule."
+            "Assis au bout du banc, poignée gauche dans la main droite et inversement.",
+            "Buste légèrement penché, monte à hauteur d'épaules, descends en 2 à 3 s."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=cable+lateral+raise+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=cable+lateral+raise+technique",
+          "imageFile": "schemas/cable-lat-3.svg"
         },
         {
           "id": "leg-raise",
@@ -964,7 +996,8 @@
           "tips": [
             "Enroule le bassin, pas d'élan."
           ],
-          "mediaUrl": "https://www.youtube.com/results?search_query=hanging+leg+raise+technique"
+          "mediaUrl": "https://www.youtube.com/results?search_query=hanging+leg+raise+technique",
+          "imageFile": "schemas/leg-raise.svg"
         }
       ],
       "notes": "Supersets A et B : enchaîne A1 puis A2 sans pause, repos après A2."
