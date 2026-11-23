@@ -27,9 +27,10 @@ VITE_BASE=/muscu-hugo/ npm run build
 ## Déployer sur Vercel (adresse utilisée : https://muscu-hugo.vercel.app/)
 
 ```bash
-npx vite build --outDir /tmp/muscu-vercel --emptyOutDir
-cd /tmp/muscu-vercel && npx vercel@latest deploy --prod --yes --name muscu-hugo
+npm run deploy:vercel
 ```
+
+La commande relie toujours le build au projet Vercel `muscu-hugo` avant de publier.
 
 ## Déployer sur GitHub Pages
 
