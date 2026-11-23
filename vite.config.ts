@@ -15,6 +15,8 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      // Enregistrement fait dans src/update.ts, pour ne jamais recharger la page en pleine séance.
+      injectRegister: false,
       includeAssets: ['icons/*.png', 'icons/favicon.svg'],
       manifest: {
         name: 'Muscu Hugo',
@@ -37,6 +39,10 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,png,jpg,svg,json,woff2}'],
         navigateFallback: `${base}index.html`,
         cleanupOutdatedCaches: true,
+        // Indispensable depuis que l'enregistrement est manuel : la nouvelle version s'active tout de suite,
+        // et src/update.ts choisit le moment du rechargement.
+        skipWaiting: true,
+        clientsClaim: true,
       },
     }),
   ],

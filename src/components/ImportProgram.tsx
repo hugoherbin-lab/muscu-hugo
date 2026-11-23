@@ -28,7 +28,7 @@ export default function ImportProgram({ label = 'Importer un programme', classNa
         throw new ProgramError('Le fichier n’est pas un JSON lisible (virgule ou accolade manquante ?).')
       }
       const program = validateProgram(raw)
-      await db.programs.put({ id: 'active', program, importedAt: Date.now() })
+      await db.programs.put({ id: 'active', program, importedAt: Date.now(), source: 'import' })
       const nEx = program.sessions.reduce((n, s) => n + s.exercises.length, 0)
       onDone?.(`Programme « ${program.programName} » importé : ${program.sessions.length} séances, ${nEx} exercices.`)
     } catch (e) {

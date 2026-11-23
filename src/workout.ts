@@ -81,7 +81,12 @@ export async function buildExerciseLog(exercise: Exercise, week: Week, usedSubst
   }
 }
 
+/** Démarre une séance. Si la même séance est déjà en cours, la reprend au lieu d'en créer une seconde. */
 export async function startWorkout(program: Program, session: Session): Promise<Workout> {
+  const running = (await db.workouts.where('status').equals('in_progress').toArray())
+    .filter((w) => w.sessionId === session.id)
+    .sort((a, b) => b.startedAt - a.startedAt)[0]
+  if (running) return running
   const now = Date.now()
   const week = weekForDate(program, now)
   const exercises: ExerciseLog[] = []

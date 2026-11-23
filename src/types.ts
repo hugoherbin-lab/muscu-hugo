@@ -114,6 +114,8 @@ export interface StoredProgram {
   id: 'active'
   program: Program
   importedAt: number
+  /** D'où vient le programme. Absent sur les installations antérieures : traité comme « seed ». */
+  source?: 'seed' | 'import' | 'restore'
 }
 
 export interface Setting {

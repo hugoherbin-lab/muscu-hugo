@@ -2,6 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import ImportProgram from '../components/ImportProgram'
+import OldAddressNotice from '../components/OldAddressNotice'
 import { db, getSetting } from '../db'
 import { currentWeek, formatDayMonth, formatRIR, formatRelativeDay, formatWeekRange } from '../program'
 import { weekProgress } from '../progress'
@@ -74,6 +75,7 @@ export default function Home() {
         <span className="home-title">Muscu Hugo</span>
         <Link to="/donnees" className="btn btn-sm btn-ghost">Données</Link>
       </div>
+      <OldAddressNotice sessions={doneList.length + inProgress.length} />
       {msg && <div className="alert alert-ok">{msg}</div>}
 
       <div className="week-hero">

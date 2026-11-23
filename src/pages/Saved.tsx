@@ -1,5 +1,6 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { Link, useParams } from 'react-router-dom'
+import BackupButton from '../components/BackupButton'
 import SessionStats from '../components/SessionStats'
 import { db } from '../db'
 import { formatDateTime } from '../program'
@@ -21,6 +22,7 @@ export default function Saved() {
       <div className="stack" style={{ marginTop: 16 }}>
         <Link to="/" className="btn btn-primary btn-xl">Retour à l’accueil</Link>
         <Link to={`/historique/${workout.id}`} className="btn btn-lg btn-block">Voir le détail</Link>
+        <BackupButton />
       </div>
     </div>
   )

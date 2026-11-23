@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ImportProgram from '../components/ImportProgram'
 import { db, getSetting } from '../db'
-import { exportBackupJson, exportJournalCsv, readFileText, restoreBackup } from '../export'
+import { exportBackupJson, exportJournalCsv, mergeBackup, readFileText, restoreBackup } from '../export'
 import { formatDateTime } from '../program'
 
 export default function Data() {
@@ -30,7 +30,7 @@ export default function Data() {
     }
   }
 
-  async function doRestore(file: File) {
+  async function doRestore(file: File, mode: 'merge' | 'replace') {
     setConfirmRestore(null)
     setMsg(null)
     try {
@@ -41,8 +41,13 @@ export default function Data() {
       } catch {
         throw new Error('Le fichier n’est pas un JSON lisible.')
       }
-      const r = await restoreBackup(raw)
-      setMsg({ kind: 'ok', text: `Sauvegarde restaurée : ${r.workouts} séance(s)${r.hasProgram ? ' et le programme' : ''}.` })
+      if (mode === 'merge') {
+        const r = await mergeBackup(raw)
+        setMsg({ kind: 'ok', text: `${r.added} séance(s) ajoutée(s) au journal${r.already ? `, ${r.already} déjà présente(s)` : ''}.` })
+      } else {
+        const r = await restoreBackup(raw)
+        setMsg({ kind: 'ok', text: `Sauvegarde restaurée : ${r.workouts} séance(s)${r.hasProgram ? ' et le programme' : ''}.` })
+      }
     } catch (e) {
       setMsg({ kind: 'error', text: (e as Error).message })
     } finally {
@@ -88,10 +93,13 @@ export default function Data() {
         </div>
         {confirmRestore && (
           <div className="alert alert-warn" style={{ marginTop: 10 }}>
-            Restaurer « {confirmRestore.name} » va <b>remplacer</b> le programme et tout le journal actuels. Continuer ?
-            <div className="row" style={{ marginTop: 10 }}>
-              <button className="btn btn-danger grow" onClick={() => void doRestore(confirmRestore)}>Oui, remplacer</button>
-              <button className="btn grow" onClick={() => setConfirmRestore(null)}>Annuler</button>
+            Que faire de « {confirmRestore.name} » ?
+            <div className="stack" style={{ marginTop: 10 }}>
+              <button className="btn btn-primary btn-block" onClick={() => void doRestore(confirmRestore, 'merge')}>Ajouter à mon journal</button>
+              <div className="small">Ajoute les séances manquantes. Rien n’est effacé.</div>
+              <button className="btn btn-danger btn-block" onClick={() => void doRestore(confirmRestore, 'replace')}>Tout remplacer</button>
+              <div className="small">Efface le programme et le journal actuels, puis remet ceux de la sauvegarde.</div>
+              <button className="btn btn-block" onClick={() => setConfirmRestore(null)}>Annuler</button>
             </div>
           </div>
         )}

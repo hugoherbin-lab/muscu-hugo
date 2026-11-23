@@ -12,6 +12,7 @@ export default function HistoryDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const [busy, setBusy] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
   const workout = useLiveQuery(() => db.workouts.get(id ?? '').then((w) => w ?? null), [id])
   const stored = useLiveQuery(() => db.programs.get('active').then((p) => p ?? null))
   if (workout === undefined) return null
@@ -23,6 +24,12 @@ export default function HistoryDetail() {
     )
 
   const session = stored?.program.sessions.find((s) => s.id === workout.sessionId)
+
+  async function remove() {
+    if (!workout) return
+    await db.workouts.delete(workout.id)
+    navigate('/historique', { replace: true })
+  }
 
   async function redo() {
     if (!stored || !session || busy) return
@@ -65,6 +72,17 @@ export default function HistoryDetail() {
       <div className="stack">
         <Link to={`/seance/${workout.id}`} className="btn btn-lg btn-block">Modifier cette séance</Link>
         {session && <button className="btn btn-lg btn-block" disabled={busy} onClick={() => void redo()}>Refaire cette séance</button>}
+        {confirmDelete ? (
+          <div className="alert alert-warn" style={{ marginBottom: 0 }}>
+            Supprimer définitivement cette séance du journal et des exports ? Fais d’abord une sauvegarde si tu hésites.
+            <div className="row" style={{ marginTop: 10 }}>
+              <button className="btn btn-danger grow" onClick={() => void remove()}>Supprimer la séance</button>
+              <button className="btn grow" onClick={() => setConfirmDelete(false)}>Garder</button>
+            </div>
+          </div>
+        ) : (
+          <button className="btn btn-ghost btn-block" onClick={() => setConfirmDelete(true)}>Supprimer cette séance</button>
+        )}
       </div>
     </div>
   )

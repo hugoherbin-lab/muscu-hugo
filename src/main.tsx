@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { registerSW } from 'virtual:pwa-register'
 import '@fontsource/big-shoulders-stencil/latin-800.css'
 import '@fontsource/atkinson-hyperlegible/latin-400.css'
 import '@fontsource/atkinson-hyperlegible/latin-700.css'
 import App from './App'
 import { trackKeyboard } from './keyboard'
 import { seedProgram } from './seed'
+import { registerUpdates } from './update'
 import './styles.css'
 
 // Demande au navigateur de ne jamais purger nos données (IndexedDB).
@@ -14,7 +14,7 @@ if (navigator.storage?.persist) {
   navigator.storage.persist().catch(() => undefined)
 }
 
-registerSW({ immediate: true })
+registerUpdates()
 trackKeyboard()
 
 function render() {

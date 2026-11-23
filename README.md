@@ -60,10 +60,20 @@ Après chaque modification : `git push` (sauvegarde du code) puis `npm run deplo
 
 ## Données et sauvegardes
 
-- **Données → Sauvegarder (JSON)** : programme + journal complet. À faire au moins une fois par semaine
-  (rappel affiché sur l’accueil après 7 jours).
-- **Données → Exporter le journal (CSV)** : une ligne par série, pour l’analyse par le coach.
-- **Données → Restaurer une sauvegarde** : remplace tout par le contenu d’une sauvegarde JSON.
+- **Sauvegarder mes données** : proposé après chaque séance et dans Données. Programme + journal complet en JSON.
+- **Exporter le journal (CSV)** : une ligne par série, pour l'analyse par le coach.
+- **Restaurer une sauvegarde** : « Ajouter à mon journal » ajoute les séances manquantes sans rien effacer,
+  « Tout remplacer » remet exactement le contenu de la sauvegarde.
+- **Supprimer une séance terminée** : Historique, ouvrir la séance, « Supprimer cette séance ».
+
+## Règles de protection
+
+- **Programme** : le programme livré avec l'app remplace celui du téléphone une seule fois par livraison.
+  Un programme importé à la main ou restauré n'est remplacé que si la livraison a un numéro de version supérieur
+  (`src/seed.ts`).
+- **Mises à jour** : la nouvelle version s'installe en arrière-plan et la page n'est rechargée que hors d'une séance
+  (`src/update.ts`). `skipWaiting` et `clientsClaim` doivent rester activés dans `vite.config.ts`.
+- **Ancienne adresse** : sur `github.io`, l'accueil affiche un guide de transfert vers `muscu-hugo.vercel.app`.
 
 ## Schémas des exercices
 
