@@ -367,6 +367,8 @@ details summary::-webkit-details-marker { display: none; }
   display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 6px 8px 6px 16px;
   background: var(--plate-blue); color: #fff; border: 0; border-radius: 28px; text-align: left;
 }
+/* Chrono réduit : la page descend pour que la barre ne recouvre pas Retour, Règles et Plan. */
+body:has(.timer-mini) .page { padding-top: calc(var(--sat) + 74px); }
 .timer-mini-time { font-family: var(--num); font-weight: 800; font-size: 34px; line-height: 1; }
 .timer-mini-label { flex: 1; min-width: 0; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .timer-mini-skip { flex: none; padding: 10px 14px; border-radius: 20px; background: #fff; color: var(--plate-blue); font-weight: 700; font-size: 16px; }

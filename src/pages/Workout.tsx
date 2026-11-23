@@ -9,7 +9,7 @@ import { db } from '../db'
 import { exerciseExtras, sessionExtras, toLines } from '../generic'
 import { schemaUrl } from '../schema'
 import { formatRIR } from '../program'
-import { unlockAudio, useTimer } from '../timer'
+import { unlockAudio, useTimerActions } from '../timer'
 import type { ExerciseLog, Program, SetLog, Workout } from '../types'
 import { useWakeLock } from '../wakeLock'
 import { WARMUP_REST_SEC, formatPerf, groupSupersets, lastPerformance, newEmptySet, progressionSuggestion, roundKg, type LastPerformance } from '../workout'
@@ -58,7 +58,8 @@ function restText(sec: number) {
 export default function WorkoutPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const timer = useTimer()
+  const timer = useTimerActions()
+  const lastScrolled = useRef<string | null>(null)
   const [workout, setWorkout] = useState<Workout | null | undefined>(undefined)
   const ref = useRef<Workout | null>(null)
   const [perf, setPerf] = useState<Record<string, Perf>>({})
@@ -99,9 +100,14 @@ export default function WorkoutPage() {
     }
   }, [id])
 
-  // Garde la série active visible au-dessus de la console.
+  // Amène la série active au-dessus de la console, une seule fois quand elle change.
+  // Sans cette garde, chaque rafraîchissement de l'écran annulait le défilement fait à la main.
   useEffect(() => {
-    document.querySelector('.set-line.selected')?.scrollIntoView({ block: 'nearest' })
+    const el = document.querySelector<HTMLElement>('.set-line.selected')
+    const key = el?.dataset.setId ?? null
+    if (key === lastScrolled.current) return
+    lastScrolled.current = key
+    el?.scrollIntoView({ block: 'nearest' })
   })
 
   useEffect(() => {
@@ -278,7 +284,7 @@ export default function WorkoutPage() {
   const missing = !selected ? null : selected.weightKg == null ? 'kg' : selected.reps == null ? 'reps' : null
   const setLabel = (s: SetLog) => (s.type === 'warmup' ? `E${warmSets.indexOf(s) + 1}` : String(workSets.indexOf(s) + 1))
   const renderLine = (s: SetLog) => (
-    <button key={s.id} className={`set-line ${s.done ? 'done' : ''} ${selected?.id === s.id ? 'selected' : ''}`} onClick={() => setSelectedId(s.id)}>
+    <button key={s.id} data-set-id={s.id} className={`set-line ${s.done ? 'done' : ''} ${selected?.id === s.id ? 'selected' : ''}`} onClick={() => setSelectedId(s.id)}>
       <span className="n">{setLabel(s)}</span>
       <span className="v">{showNum(s.weightKg)} × {showNum(s.reps)}</span>
       {s.rpe != null && <span className="r">RPE {showNum(s.rpe)}</span>}

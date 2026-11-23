@@ -16,6 +16,10 @@ interface TimerApi {
 
 const TimerContext = createContext<TimerApi | null>(null)
 
+/** Actions seules : leur valeur ne change jamais, donc les écrans qui lancent un repos ne se redessinent pas à chaque seconde. */
+type TimerActions = Pick<TimerApi, 'start' | 'skip'>
+const TimerActionsContext = createContext<TimerActions | null>(null)
+
 let audioCtx: AudioContext | null = null
 /** À appeler dans un geste utilisateur : iOS n'autorise le son qu'après une interaction. */
 export function unlockAudio() {
@@ -136,13 +140,23 @@ export function TimerProvider({ children }: { children: ReactNode }) {
     [state, remaining, finished, minimized, start, adjust, skip],
   )
 
+  const actions = useMemo<TimerActions>(() => ({ start, skip }), [start, skip])
+
   if (!loaded) return null
   return (
-    <TimerContext.Provider value={api}>
-      {children}
-      <TimerOverlay />
-    </TimerContext.Provider>
+    <TimerActionsContext.Provider value={actions}>
+      <TimerContext.Provider value={api}>
+        {children}
+        <TimerOverlay />
+      </TimerContext.Provider>
+    </TimerActionsContext.Provider>
   )
+}
+
+export function useTimerActions(): TimerActions {
+  const ctx = useContext(TimerActionsContext)
+  if (!ctx) throw new Error('useTimerActions hors TimerProvider')
+  return ctx
 }
 
 export function useTimer(): TimerApi {
